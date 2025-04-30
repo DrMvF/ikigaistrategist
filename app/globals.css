@@ -1,16 +1,35 @@
+@font-face {
+  font-family: 'Computer Modern';
+  src: url('/fonts/cmunrm.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Computer Modern';
+  src: url('/fonts/cmunbx.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Computer Modern';
+  src: url('/fonts/cmunti.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
 @import "tailwindcss";
-@import "../styles/fonts.css";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-sans: 'Computer Modern', serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans); /* kannst du auch rausnehmen */
+  --font-sans: 'Computer Modern', serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -26,4 +45,5 @@ body {
   color: var(--foreground);
   font-family: 'Computer Modern', serif;
 }
+
 
