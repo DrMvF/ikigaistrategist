@@ -12,18 +12,18 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-cm">
-          <li className="mb-2 tracking-[-.01em]">
-            Radical Sensitive Leadership{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-cm font-semibold">
-              white.space
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Intuition. Intelligence. Integrity.
-          </li>
-        </ol>
+       <div className="text-center sm:text-left">
+          <h1 className="text-3xl sm:text-4xl font-bold font-cm mb-2">
+          Radical Sensitive Leadership{" "}
+        <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-cm font-semibold">
+          white.space
+        </code>
+          </h1>
+        <p className="text-lg sm:text-xl font-cm tracking-tight">
+        Intuition. Intelligence. Integrity.
+      </p>
+    </div>
+
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
