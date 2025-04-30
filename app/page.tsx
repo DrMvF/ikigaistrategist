@@ -38,13 +38,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
+         <span className="font-bold text-xl mr-2">●</span>
           LinkedIn
         </a>
         <a
@@ -53,13 +47,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
+          <span className="font-bold text-xl mr-2">●</span>
           All Insiders
         </a>
         <a
@@ -68,13 +56,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
+          <span className="font-bold text-xl mr-2">●</span>
           Go to ikigami.de →
         </a>
       </footer>
