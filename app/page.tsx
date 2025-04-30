@@ -15,9 +15,6 @@ export default function Home() {
        <div className="text-center sm:text-left">
           <h1 className="text-3xl sm:text-4xl font-bold font-cm mb-2">
           Radical Sensitive Leadership{" "}
-        <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-cm font-semibold">
-          white.space
-        </code>
           </h1>
         <p className="text-lg sm:text-xl font-cm tracking-tight">
         Intuition. Intelligence. Integrity.
@@ -80,7 +77,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Insider
+          All Insiders
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
