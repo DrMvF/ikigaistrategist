@@ -1,3 +1,5 @@
+import SubscribeForm from '@/components/SubscribeForm';
+
 import { getPosts, getPostBySlug } from '@/lib/ghost';
 
 export async function generateStaticParams() {
@@ -50,6 +52,7 @@ export default async function BlogPostPage({
           ← Back to Blog
         </a>
       </div>
+      <SubscribeForm />
     </main>
   );
 }
