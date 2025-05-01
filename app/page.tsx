@@ -1,3 +1,5 @@
+import SubscribeForm from '@/components/SubscribeForm';
+
 import Image from "next/image";
 
 export default function Home() {
@@ -26,6 +28,7 @@ export default function Home() {
             Offer White Space
           </a>
         </div>
+        <SubscribeForm />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a

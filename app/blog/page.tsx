@@ -6,7 +6,7 @@ export default async function BlogPage() {
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-20">
-      <h1 className="text-4xl mb-12">Gedankenraum</h1>
+      <h1 className="text-4xl mb-12">Blog Deep Flow</h1>
       <ul className="space-y-8">
         {posts.map((post) => (
           <li key={post.id}>
