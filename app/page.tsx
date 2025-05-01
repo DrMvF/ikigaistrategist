@@ -28,8 +28,11 @@ export default function Home() {
             Offer White Space
           </a>
         </div>
-        <MinimalSubscribeForm />
       </main>
+        {/* ✨ Subscribe-Formular */}
+        <div className="w-full flex justify-center mt-12">
+        <MinimalSubscribeForm />
+        </div>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
