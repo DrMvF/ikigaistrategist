@@ -31,13 +31,13 @@ export default function RootLayout({
 
         {/* 👇 GHOST PORTAL SCRIPT */}
         <script
-          defer
-          src="https://radical-sensitive-leadership.ghost.io/portal.min.js"
-          data-ghost="https://radical-sensitive-leadership.ghost.io/"
-          data-key="pub_0d94e22b89520e251f032d0c65"
-          data-api="v3"
-          crossOrigin="anonymous"
-        />
+        defer
+        src="https://ghost.radicalsensitiveleadership.com/portal.min.js"
+        data-ghost="https://ghost.radicalsensitiveleadership.com/"
+        data-key="pub_0d94e22b89520e251f032d0c65"
+        data-api="v3"
+        crossOrigin="anonymous"
+      />
       </body>
     </html>
   );
