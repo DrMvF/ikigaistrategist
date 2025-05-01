@@ -2,10 +2,19 @@ import { getPosts, getPostBySlug } from '@/lib/ghost';
 
 export async function generateStaticParams() {
   const posts = await getPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+// ✅ Hier kommt der wichtige Fix:
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(params.slug);
 
   return (
@@ -15,3 +24,4 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     </article>
   );
 }
+
