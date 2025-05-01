@@ -16,7 +16,7 @@ export default function MinimalSubscribeForm() {
         e.preventDefault();
         openPortal();
       }}
-      className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full font-cm mt-16"
+      className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full font-cm mt-8 mb-4"
     >
       <input
         type="email"
