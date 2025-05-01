@@ -1,9 +1,5 @@
 import { getPosts, getPostBySlug } from '@/lib/ghost';
 
-type Params = {
-  slug: string;
-};
-
 export async function generateStaticParams() {
   const posts = await getPosts();
   return posts.map((post) => ({
@@ -11,7 +7,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPostPage({ params }: { params: Params }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getPostBySlug(params.slug);
 
   return (
@@ -22,3 +22,4 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     </article>
   );
 }
+
