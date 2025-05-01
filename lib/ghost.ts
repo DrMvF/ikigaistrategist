@@ -7,7 +7,12 @@ export type GhostPost = {
   slug: string;
   html: string;
   published_at: string;
+  custom_excerpt?: string;
+  excerpt?: string;
+  feature_image?: string;
+  tags?: { name: string }[];
 };
+
 
 // Ghost API initialisieren
 const api = new GhostContentAPI({

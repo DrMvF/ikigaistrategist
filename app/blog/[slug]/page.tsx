@@ -7,9 +7,32 @@ export async function generateStaticParams() {
   }));
 }
 
-// ✅ Finaler Workaround für Vercel/TypeScript/Next.js 15
-// @ts-ignore
-export default async function BlogPostPage({ params }) {
+// ✅ SEO & Social Metadata pro Blogpost
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug);
+
+  return {
+    title: `${post.title} – Radical Sensitive Leadership`,
+    description: post.custom_excerpt || post.excerpt || 'Thoughts from the field of Radical Sensitive Leadership.',
+    openGraph: {
+      title: post.title,
+      description: post.custom_excerpt || post.excerpt || '',
+      url: `https://www.radicalsensitiveleadership.com/blog/${post.slug}`,
+      siteName: 'Radical Sensitive Leadership',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary',
+      title: post.title,
+      description: post.custom_excerpt || post.excerpt || '',
+    },
+  };
+}
+
+export default async function BlogPostPage({
+  // @ts-ignore – workaround for Next.js 15
+  params,
+}) {
   const post = await getPostBySlug(params.slug);
 
   return (
@@ -23,17 +46,12 @@ export default async function BlogPostPage({ params }) {
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
       <div className="mt-16">
-        <a href="/blog" className="text-sm underline hover:opacity-60">← Zurück zum Blog</a>
-      </div>
-      <div className="mt-12">
-        <a
-          href="https://DEIN-GHOST-NAME.ghost.io/#/portal/signup"
-          className="inline-block border px-4 py-2 text-sm hover:bg-gray-100 transition"
-        >
-          Newsletter abonnieren
+        <a href="/blog" className="text-sm underline hover:opacity-60">
+          ← Back to Blog
         </a>
       </div>
     </main>
   );
 }
+
 
