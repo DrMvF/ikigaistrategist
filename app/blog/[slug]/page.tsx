@@ -2,15 +2,19 @@ import { getPosts, getPostBySlug } from '@/lib/ghost';
 
 export async function generateStaticParams() {
   const posts = await getPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
+// ✅ Vercel-Fix: Params kommt als Promise – also explizit mit await behandeln
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-20">
@@ -27,7 +31,7 @@ export default async function BlogPostPage({
       </div>
       <div className="mt-12">
         <a
-          href="https://radical-sensitive-leadership.ghost.io/#/portal/signup"
+          href="https://DEIN-GHOST-NAME.ghost.io/#/portal/signup"
           className="inline-block border px-4 py-2 text-sm hover:bg-gray-100 transition"
         >
           Newsletter abonnieren
