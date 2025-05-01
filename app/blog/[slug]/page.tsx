@@ -1,17 +1,7 @@
 import { getPosts, getPostBySlug } from '@/lib/ghost';
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-type GhostPost = {
-  id: string;
-  title: string;
+type Params = {
   slug: string;
-  html: string;
-  published_at: string;
 };
 
 export async function generateStaticParams() {
@@ -21,8 +11,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post: GhostPost = await getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Params }) {
+  const post = await getPostBySlug(params.slug);
 
   return (
     <article style={{ padding: '2rem' }}>
@@ -32,5 +22,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </article>
   );
 }
-
-
