@@ -1,4 +1,24 @@
-export default function OfferPage() {
+export const metadata = {
+    title: 'Offer White Space – Radical Sensitive Leadership',
+    description:
+      'Radical Sensitive Leadership is not a product. It’s a space. A perceptive invitation for those ready to embody responsibility.',
+    openGraph: {
+      title: 'Offer White Space',
+      description:
+        'This is not an offer to convince. It’s a space to resonate. If you feel it, you’ll know.',
+      url: 'https://www.radicalsensitiveleadership.com/offer',
+      siteName: 'Radical Sensitive Leadership',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: 'Offer White Space',
+      description:
+        'This is not an offer to convince. It’s a space to resonate.',
+    },
+  };
+  
+  export default function OfferPage() {
     return (
       <main className="max-w-3xl mx-auto px-4 py-32 font-cm">
         <h1 className="text-3xl sm:text-4xl mb-8">
@@ -27,4 +47,5 @@ export default function OfferPage() {
       </main>
     );
   }
+  
   
