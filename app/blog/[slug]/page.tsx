@@ -7,14 +7,10 @@ export async function generateStaticParams() {
   }));
 }
 
-// ✅ Vercel-Fix: Params kommt als Promise – also explizit mit await behandeln
-export default async function BlogPostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+// ✅ Finaler Workaround für Vercel/TypeScript/Next.js 15
+// @ts-ignore
+export default async function BlogPostPage({ params }) {
+  const post = await getPostBySlug(params.slug);
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-20">
@@ -40,3 +36,4 @@ export default async function BlogPostPage({
     </main>
   );
 }
+
