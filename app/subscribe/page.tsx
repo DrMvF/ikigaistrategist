@@ -25,13 +25,22 @@ export default function SubscribePage() {
         }),
       });
 
+      const text = await res.text();
+      console.log('Status:', res.status);
+      console.log('Response:', text);
+
       if (res.ok) {
         setStatus('success');
       } else {
         setStatus('error');
+        // Fallback: open Ghost Portal
+        window.open('/#/portal/signup', '_blank');
       }
     } catch (err) {
+      console.error('Network error:', err);
       setStatus('error');
+      // Fallback: open Ghost Portal
+      window.open('/#/portal/signup', '_blank');
     }
   };
 
@@ -41,7 +50,7 @@ export default function SubscribePage() {
       <p className="mb-8 text-lg sm:text-xl max-w-xl">
         Receive deep impulses and curated offerings<br />
         from Radical Sensitive Leadership.
-    </p>
+      </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
         <input
@@ -54,16 +63,18 @@ export default function SubscribePage() {
         />
 
         <label className="flex items-start gap-2 text-left text-sm sm:text-base">
-            <input
+          <input
             type="checkbox"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
             className="mt-1"
-        />
-        <span>
-            I want to receive curated updates from <strong>Radical Sensitive Leadership</strong>.
-        </span>
+          />
+          <span>
+            I want to receive curated updates and insights<br />
+            from Radical Sensitive Leadership.
+          </span>
         </label>
+
         <button
           type="submit"
           disabled={!consent || status === 'sending'}
@@ -79,10 +90,11 @@ export default function SubscribePage() {
         )}
         {status === 'error' && (
           <p className="text-red-600 text-sm mt-2">
-            Something went wrong. Please try again.
+            Something went wrong. Opening portal...
           </p>
         )}
       </form>
     </main>
   );
 }
+
