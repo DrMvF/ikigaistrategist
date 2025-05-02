@@ -53,15 +53,16 @@ export default function SubscribePage() {
         />
 
         <label className="flex items-start gap-2 text-left text-sm sm:text-base">
-          <input
+            <input
             type="checkbox"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
             className="mt-1"
-          />
-          I want to receive the newsletter and curated updates from Radical Sensitive Leadership.
+        />
+        <span>
+            I want to receive curated updates from <strong>Radical Sensitive Leadership</strong>.
+        </span>
         </label>
-
         <button
           type="submit"
           disabled={!consent || status === 'sending'}
