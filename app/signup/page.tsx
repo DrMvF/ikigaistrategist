@@ -1,3 +1,5 @@
+'use client';
+
 // signup-form.tsx (Next.js React component with Supabase integration)
 
 import { useState } from 'react';
