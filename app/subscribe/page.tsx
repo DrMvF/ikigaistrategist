@@ -39,8 +39,9 @@ export default function SubscribePage() {
     <main className="flex flex-col items-center justify-center min-h-screen p-8 sm:p-20 font-cm text-center">
       <h1 className="text-2xl sm:text-4xl font-bold mb-4">Subscribe</h1>
       <p className="mb-8 text-lg sm:text-xl max-w-xl">
-        Receive deep impulses, quotes, essays, and offerings from Radical Sensitive Leadership.
-      </p>
+        Receive deep impulses and curated offerings<br />
+        from Radical Sensitive Leadership.
+    </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
         <input
