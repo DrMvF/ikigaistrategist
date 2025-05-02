@@ -38,7 +38,9 @@ export default function SubscribePage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 sm:p-20 font-cm text-center">
       <h1 className="text-2xl sm:text-4xl font-bold mb-4">Subscribe</h1>
-      <p className="mb-8 text-lg sm:text-xl max-w-xl">Erhalte tiefe Impulse, Zitate, Essays & Angebote von Radical Sensitive Leadership.</p>
+      <p className="mb-8 text-lg sm:text-xl max-w-xl">
+        Receive deep impulses, quotes, essays, and offerings from Radical Sensitive Leadership.
+      </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
         <input
@@ -57,7 +59,7 @@ export default function SubscribePage() {
             onChange={(e) => setConsent(e.target.checked)}
             className="mt-1"
           />
-          Ich möchte den Newsletter & inhaltliche Updates von Radical Sensitive Leadership erhalten.
+          I want to receive the newsletter and curated updates from Radical Sensitive Leadership.
         </label>
 
         <button
@@ -65,17 +67,17 @@ export default function SubscribePage() {
           disabled={!consent || status === 'sending'}
           className="rounded-full bg-black text-white px-6 py-3 font-medium hover:bg-gray-800 transition disabled:opacity-50"
         >
-          {status === 'sending' ? 'Sende...' : 'Jetzt abonnieren'}
+          {status === 'sending' ? 'Sending...' : 'Subscribe now'}
         </button>
 
         {status === 'success' && (
           <p className="text-green-600 text-sm mt-2">
-            Check deine Inbox für den Bestätigungslink ✉️
+            Please check your inbox for the confirmation link ✉️
           </p>
         )}
         {status === 'error' && (
           <p className="text-red-600 text-sm mt-2">
-            Da ging etwas schief – versuch es bitte nochmal.
+            Something went wrong. Please try again.
           </p>
         )}
       </form>
