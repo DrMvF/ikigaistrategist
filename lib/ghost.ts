@@ -24,7 +24,11 @@ const api = new GhostContentAPI({
 // Alle Posts abrufen
 export async function getPosts(): Promise<GhostPost[]> {
   return await api.posts
-    .browse({ limit: 'all' })
+    .browse({
+      limit: 'all',
+      formats: ['html'],
+      include: 'tags,authors',
+    })
     .catch((err: unknown) => {
       console.error('[Ghost] Fehler beim Laden der Posts:', err);
       return [];
