@@ -30,7 +30,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-
 export default async function BlogPostPage({
   // @ts-ignore – workaround for Next.js 15
   params,
@@ -38,13 +37,13 @@ export default async function BlogPostPage({
   const post = await getPostBySlug(params.slug);
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-20">
+    <main className="max-w-3xl mx-auto px-4 py-20 font-cm">
       <h1 className="text-4xl mb-4">{post.title}</h1>
       <p className="text-sm text-gray-500 mb-12">
         {new Date(post.published_at).toLocaleDateString('de-DE')}
       </p>
       <article
-        className="prose prose-lg prose-neutral"
+        className="prose prose-lg prose-neutral leading-relaxed sm:leading-loose [&_p]:mb-6 [&_h2]:mt-12 [&_h2]:mb-4"
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
       <div className="mt-16">
@@ -55,5 +54,6 @@ export default async function BlogPostPage({
     </main>
   );
 }
+
 
 
