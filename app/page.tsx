@@ -1,4 +1,3 @@
-import MinimalSubscribeForm from '@/components/MinimalSubscribeForm';
 
 import Image from "next/image";
 
@@ -28,10 +27,6 @@ export default function Home() {
          White Space
       </a>
 </div>
-      {/* ✨ Subscribe-Formular */}
-        <div className="w-full flex justify-center mt-12">
-        <MinimalSubscribeForm />
-        </div>  
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
