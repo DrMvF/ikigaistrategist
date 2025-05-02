@@ -39,51 +39,54 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Join the Deep Flow</h2>
-      {success ? (
-        <p className="text-green-600">Thank you for signing up!</p>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block font-medium">Why do you want to join?</label>
-            <textarea
-              name="motivation"
-              value={formData.motivation}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded px-3 py-2"
-              rows={4}
-            />
-          </div>
-          {error && <p className="text-red-600">{error}</p>}
-          <button type="submit" className="bg-black text-white px-4 py-2 rounded">
-            Submit
-          </button>
-        </form>
-      )}
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-xl p-6">
+        <h2 className="text-3xl font-bold mb-6 text-center">Join the Deep Flow</h2>
+        {success ? (
+          <p className="text-green-600 text-center">Thank you for signing up!</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block font-medium">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label className="block font-medium">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+            <div>
+              <label className="block font-medium">Why do you want to join?</label>
+              <textarea
+                name="motivation"
+                value={formData.motivation}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded px-3 py-2"
+                rows={4}
+              />
+            </div>
+            {error && <p className="text-red-600">{error}</p>}
+            <button type="submit" className="bg-black text-white px-4 py-2 rounded w-full">
+              Submit
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
+
