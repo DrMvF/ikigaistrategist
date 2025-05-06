@@ -2,12 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase } from '@/lib/supabase-browser';
 
 export default function CreatorshipSignup() {
   const [formData, setFormData] = useState({
@@ -28,9 +23,11 @@ export default function CreatorshipSignup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const { error } = await supabase.from('creatorship_signups').insert([{ ...formData }]);
 
     if (error) {
+      console.error('Supabase Insert Error:', error); // Log for debugging
       setError(error.message);
     } else {
       router.push('/creatorship/thank-you');
@@ -92,4 +89,5 @@ export default function CreatorshipSignup() {
     </div>
   );
 }
+
 
