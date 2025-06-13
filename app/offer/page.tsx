@@ -50,7 +50,7 @@ export default function OfferPage() {
 
       <div className="space-y-10">
         <div>
-          <h3 className="text-xl font-semibold mb-2">Executive Clarity Session – 90 Min – €350</h3>
+          <h3 className="text-xl font-semibold mb-2">Executive Clarity Session – 90 Min – €590 <span className="text-base font-normal">plus VAT</span></h3>
           <ul className="list-disc ml-6 text-base mb-2">
             <li>One deep 1:1 session</li>
             <li>Ideal for acute challenges or orientation</li>
@@ -65,7 +65,7 @@ export default function OfferPage() {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold mb-2">Strategic Reset Package – 3×60 Min – €1,200</h3>
+          <h3 className="text-xl font-semibold mb-2">Strategic Reset Package – 3×60 Min – €1,200 <span className="text-base font-normal">plus VAT</span></h3>
           <ul className="list-disc ml-6 text-base mb-2">
             <li>Three coaching sessions</li>
             <li>Written reflection & leadership feedback</li>
@@ -80,7 +80,7 @@ export default function OfferPage() {
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold mb-2">Corporate Coaching Framework – from €6,000</h3>
+          <h3 className="text-xl font-semibold mb-2">Corporate Coaching Framework – from €6,000 <span className="text-base font-normal">excl. VAT</span></h3>
           <ul className="list-disc ml-6 text-base mb-2">
             <li>5–15 sessions per Key Leader</li>
             <li>HR briefings, optional anonymized reporting</li>
