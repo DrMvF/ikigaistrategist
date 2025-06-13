@@ -27,36 +27,29 @@ export default function Home() {
          White Space
       </a>
 </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://www.linkedin.com/in/miriamvonfelbert/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-         <span className="font-bold text-xl mr-2">●</span>
-          LinkedIn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://ikigami.beehiiv.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="font-bold text-xl mr-2">●</span>
-          All Insiders
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://ikigami.de/en/home-english/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="font-bold text-xl mr-2">●</span>
-          Go to ikigami.de →
-        </a>
-      </footer>
-    </div>
-  );
+     </main>
+  <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center text-sm mt-16">
+    <a
+      className="hover:underline hover:underline-offset-4"
+      href="/legal"
+    >
+      Legal Notice
+    </a>
+    <a
+      className="hover:underline hover:underline-offset-4"
+      href="/privacy"
+    >
+      Privacy Policy
+    </a>
+    <a
+      className="hover:underline hover:underline-offset-4"
+      href="https://www.linkedin.com/in/miriamvonfelbert/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LinkedIn →
+    </a>
+  </footer>
+</div>
+);
 }
