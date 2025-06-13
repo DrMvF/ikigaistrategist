@@ -27,27 +27,30 @@ export default function Home() {
          White Space
       </a>
 </div>
-     </main>
-  <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center text-sm mt-16">
+</main>
+  <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center text-base mt-16">
     <a
-      className="hover:underline hover:underline-offset-4"
+      className="flex items-center gap-2 hover:underline hover:underline-offset-4"
       href="/legal"
     >
+      <span className="font-bold text-xl mr-2">●</span>
       Legal Notice
     </a>
     <a
-      className="hover:underline hover:underline-offset-4"
+      className="flex items-center gap-2 hover:underline hover:underline-offset-4"
       href="/privacy"
     >
+      <span className="font-bold text-xl mr-2">●</span>
       Privacy Policy
     </a>
     <a
-      className="hover:underline hover:underline-offset-4"
+      className="flex items-center gap-2 hover:underline hover:underline-offset-4"
       href="https://www.linkedin.com/in/miriamvonfelbert/"
       target="_blank"
       rel="noopener noreferrer"
     >
-      LinkedIn →
+      <span className="font-bold text-xl mr-2">●</span>
+      LinkedIn
     </a>
   </footer>
 </div>
