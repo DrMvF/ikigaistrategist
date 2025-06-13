@@ -57,7 +57,7 @@ export default function OfferPage() {
             <li>Optional written summary</li>
           </ul>
           <a
-            href="https://cal.radicalsensitiveleadership.com/clarity-session"
+            href="https://cal.com/radicalsensitiveleadership/clarity-session"
             className="underline text-base hover:opacity-70"
           >
             → Book now
@@ -72,7 +72,7 @@ export default function OfferPage() {
             <li>For transitions, team challenges or strategy shifts</li>
           </ul>
           <a
-            href="https://cal.radicalsensitiveleadership.com/reset-package"
+            href="https://cal.com/radicalsensitiveleadership/reset-package"
             className="underline text-base hover:opacity-70"
           >
             → Book package
@@ -119,7 +119,7 @@ export default function OfferPage() {
         <h3 className="text-xl mb-2">Free initial call</h3>
         <p className="mb-2">Let’s speak first, feel the resonance, then decide:</p>
         <a
-          href="https://cal.radicalsensitiveleadership.com/intro-call"
+          href="https://cal.com/radicalsensitiveleadership/intro-call"
           className="underline text-base hover:opacity-70"
         >
           → Book a 15-min conversation
