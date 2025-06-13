@@ -108,9 +108,9 @@ export default function OfferPage() {
 
       <h2 className="text-2xl font-semibold mb-4">Why me</h2>
       <ul className="list-disc ml-6 text-base mb-12">
-        <li>16 years leadership in Pharma/MedTech (AstraZeneca, Applied Medical)</li>
+        <li>16 years leadership in Pharma/MedTech</li>
         <li>Executive Coach with depth & business logic</li>
-        <li>Scientific background in Positive Psychology & Calling</li>
+        <li>Scientific background in Positive Psychology & Coaching</li>
         <li>Fluent in market mechanics and human complexity</li>
         <li>Sessions in German or English, remote or in person</li>
       </ul>
