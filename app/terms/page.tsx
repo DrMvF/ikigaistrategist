@@ -40,6 +40,11 @@ export default function TermsPage() {
       <p className="mt-12 text-sm text-gray-500">
         Last updated: {new Date().toLocaleDateString("en-GB")}
       </p>
+       <div className="mt-16">
+        <a href="/" className="text-sm underline hover:opacity-60">
+          ← Back to Home
+        </a>
+      </div>
     </main>
   );
 }
