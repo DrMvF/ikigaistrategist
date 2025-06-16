@@ -2,83 +2,50 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-cm">
-      <main className="flex flex-col gap-10 row-start-2 items-center sm:items-start max-w-2xl text-center sm:text-left">
-        <div>
-          <h1 className="text-3xl sm:text-4xl font-bold font-cm mb-2">
-            Radical Sensitive Leadership
-          </h1>
-          <p className="text-lg sm:text-xl font-cm tracking-tight mb-1">
-            Intuition. Intelligence. Integrity.
-          </p>
-          <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 font-cm">
-            Dr. Miriam von Felbert • Deepfluencer | Positive Psychologist | Ikigai Strategist
-          </p>
-        </div>
+    <div className="flex flex-col min-h-screen items-center justify-between p-8 sm:p-20 font-cm">
+      <main className="flex flex-col items-center text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">
+          Radical Sensitive Leadership
+        </h1>
+        <p className="text-lg sm:text-xl">Intuition. Intelligence. Integrity.</p>
 
-        <div className="flex flex-col gap-6 w-full">
-          <div>
-            <a
-              className="block rounded-full border border-transparent transition-colors bg-black text-white hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#ccc] font-medium text-base h-12 px-5 text-center"
-              href="/deepflow"
-            >
-              Deep Flow
-            </a>
-            <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
-              Daily reflections on presence, intuition, and radical sensitivity.
-            </p>
-          </div>
+        <div className="h-12 sm:h-16" /> {/* Extra white space */}
 
-          <div>
-            <a
-              className="block rounded-full border border-black/[.08] dark:border-white/[.145] transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] font-medium text-base h-12 px-5 text-center"
-              href="/weekly"
-            >
-              Radical Weekly
-            </a>
-            <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
-              Build in public as a psychologist. Weekly essays on strategy, transformation, and clarity.
-            </p>
-          </div>
+        <p className="text-base sm:text-lg text-gray-600 mb-12">
+          Dr. Miriam von Felbert • Deepfluencer | Positive Psychologist | Ikigai Strategist
+        </p>
 
-          <div>
-            <a
-              className="block rounded-full border border-black/[.08] dark:border-white/[.145] transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] font-medium text-base h-12 px-5 text-center"
-              href="/offer"
-            >
-              White Space
-            </a>
-            <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
-              Executive coaching for leaders in Pharma, Biotech, and MedTech.
-            </p>
-          </div>
+        <div className="flex flex-col gap-4 w-full max-w-xs">
+          <a
+            href="https://ghost.radicalsensitiveleadership.com/"
+            className="rounded-full border border-black dark:border-white px-6 py-3 text-base sm:text-lg text-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+          >
+            Deep Flow
+          </a>
+          <a
+            href="/offer"
+            className="rounded-full border border-black dark:border-white px-6 py-3 text-base sm:text-lg text-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+          >
+            White Space
+          </a>
         </div>
       </main>
 
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center text-base mt-16">
-        <a className="flex items-center gap-2 hover:underline hover:underline-offset-4" href="/legal">
-          <span className="font-bold text-xl mr-2">●</span>
-          Legal Notice
-        </a>
-        <a className="flex items-center gap-2 hover:underline hover:underline-offset-4" href="/privacy">
-          <span className="font-bold text-xl mr-2">●</span>
-          Privacy Policy
-        </a>
-        <a className="flex items-center gap-2 hover:underline hover:underline-offset-4" href="/terms">
-          <span className="font-bold text-xl mr-2">●</span>
-          Terms & Conditions
-        </a>
+      <footer className="flex flex-wrap justify-center gap-4 mt-20 text-sm text-center">
+        <a href="/legal" className="hover:underline">● Legal Notice</a>
+        <a href="/privacy" className="hover:underline">● Privacy Policy</a>
+        <a href="/terms" className="hover:underline">● Terms & Conditions</a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://www.linkedin.com/in/miriamvonfelbert/"
           target="_blank"
           rel="noopener noreferrer"
+          className="hover:underline"
         >
-          <span className="font-bold text-xl mr-2">●</span>
-          LinkedIn
+          ● LinkedIn
         </a>
       </footer>
     </div>
   );
 }
+
 
