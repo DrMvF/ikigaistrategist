@@ -52,10 +52,10 @@ export default function RadicalWeeklyPage() {
       </p>
 
       <a
-        href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cc1ad90e240001c066f1/monthly"
-        className="inline-block rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base text-center hover:bg-[#ccc] transition-colors"
+      href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cc1ad90e240001c066f1/monthly"
+      className="inline-block rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base text-center hover:bg-[#ccc] transition-colors"
       >
-        → Subscribe to Radical Weekly
+      → Subscribe to Radical Weekly
       </a>
 
       <div className="mt-16">
