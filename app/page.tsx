@@ -19,7 +19,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 w-full max-w-xs">
           {/* Deep Flow Button – Black */}
           <a
-            href="https://ghost.radicalsensitiveleadership.com/"
+            href="/deepflow"
             className="rounded-full bg-black text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#383838] transition-colors"
           >
             Deep Flow
@@ -27,7 +27,7 @@ export default function Home() {
 
           {/* Radical Weekly Button – Light Gray */}
           <a
-            href="https://ghost.radicalsensitiveleadership.com/radical-weekly"
+            href="/radicalweekly"
             className="rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base sm:text-lg text-center hover:bg-[#ccc] transition-colors"
           >
             Radical Weekly
