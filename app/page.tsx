@@ -25,18 +25,18 @@ export default function Home() {
             Deep Flow
           </a>
 
-          {/* Radical Weekly Button – Light Gray */}
+          {/* Radical Weekly Button – Dark Gray */}
           <a
             href="/radicalweekly"
-            className="rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base sm:text-lg text-center hover:bg-[#ccc] transition-colors"
+            className="rounded-full bg-[#666] text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#555] transition-colors"
           >
             Radical Weekly
           </a>
 
-          {/* Founding Circle Button – Embossed Black */}
+          {/* Founding Circle Button – Light Gray */}
           <a
             href="/foundingcircle"
-            className="rounded-full bg-black text-white px-6 py-3 text-base sm:text-lg text-center shadow-md hover:shadow-lg transition-all"
+            className="rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base sm:text-lg text-center hover:bg-[#ccc] transition-colors"
           >
             Founding Circle
           </a>
