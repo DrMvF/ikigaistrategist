@@ -33,6 +33,14 @@ export default function Home() {
             Radical Weekly
           </a>
 
+          {/* Founding Circle Button – Embossed Black */}
+          <a
+            href="/foundingcircle"
+            className="rounded-full bg-black text-white px-6 py-3 text-base sm:text-lg text-center shadow-md hover:shadow-lg transition-all"
+          >
+            Founding Circle
+          </a>
+
           {/* White Space Button – White border */}
           <a
             href="/offer"
