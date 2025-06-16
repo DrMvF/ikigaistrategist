@@ -28,7 +28,7 @@ export default function Home() {
           {/* Radical Weekly Button – Dark Gray */}
           <a
             href="/radicalweekly"
-            className="rounded-full bg-[#666] text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#555] transition-colors"
+            className="rounded-full bg-[#4b4b4b] text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#5e5e5e] transition-colors"
           >
             Radical Weekly
           </a>
@@ -56,6 +56,14 @@ export default function Home() {
         <a href="/privacy" className="hover:underline">● Privacy Policy</a>
         <a href="/terms" className="hover:underline">● Terms & Conditions</a>
         <a
+          href="https://www.youtube.com/@DrMiriamvonFelbert"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          ● YouTube
+        </a>
+        <a
           href="https://www.linkedin.com/in/miriamvonfelbert/"
           target="_blank"
           rel="noopener noreferrer"
@@ -63,7 +71,24 @@ export default function Home() {
         >
           ● LinkedIn
         </a>
+        <a
+          href="https://www.instagram.com/drmiriamvonfelbert"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          ● Instagram
+        </a>
+        <a
+          href="https://x.com/DrMvonFelbert"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          ● X
+        </a>
       </footer>
     </div>
   );
 }
+
