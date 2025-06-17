@@ -1,47 +1,48 @@
+// Seite 1: pages/index.tsx
 'use client';
 
 import { track } from '@vercel/analytics';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-40 sm:pt-56 font-cm text-black">
-      <main className="flex flex-col items-center text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-2">
-          Ikigai Strategist
+    <div className="flex flex-col min-h-screen justify-center px-6 py-24 sm:py-40 font-cm text-black bg-white">
+      <main className="max-w-3xl mx-auto text-center">
+        <h1 className="text-3xl sm:text-5xl font-bold leading-snug mb-8">
+          Imagine your day begins with a whisper.
         </h1>
-
-        <p className="text-xl sm:text-2xl">
-          A radically simple, deeply powerful habit tracker
+        <p className="text-lg sm:text-xl leading-relaxed text-gray-700">
+          Not with urgency. Not with a checklist.<br />
+          But with a soft, spoken intention:<br /><br />
+          What you want to love.<br />
+          What you want to deepen.<br />
+          Who you want to serve.<br />
+          And what you need to feel held.<br /><br />
+          You speak it.<br />
+          Just for yourself.<br /><br />
+          Each morning, you return to that inner compass.<br />
+          Each evening, you whisper your truth back into the tool.<br /><br />
+          After seven days, it listens back.<br /><br />
+          You don’t get a grade. You get insight.<br /><br />
+          Slowly, steadily, a rhythm emerges.<br />
+          A dialogue.<br /><br />
+          You’re not optimizing your life —<br />
+          you’re relating to it.<br /><br />
+          And through that relationship,<br />
+          your well-being grows.<br /><br />
+          Ikigai Strategist isn’t a tracker.<br />
+          It’s a mirror.
         </p>
 
-        <div className="h-12 sm:h-16" />
-
-        <p className="text-lg sm:text-xl">
-          Built in public. Designed for alignment.
-        </p>
-        <p className="text-lg sm:text-xl mb-12">
-          Thank you for being early.
-        </p>
-
-        <form
-          action="https://radicalsensitiveleadership.mailcoach.app/subscribe/ed7af73e-6251-434c-816f-28012afe6452"
-          method="post"
-          onSubmit={() => track('click_waitlist')}
-          className="flex flex-col gap-4 w-full max-w-xs"
-        >
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="Your email address"
-            className="w-full border border-black rounded-full px-6 py-3 text-lg sm:text-xl text-center"
-          />
-          <input
-            type="submit"
-            value="Join the Waitlist"
-            className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors"
-          />
-        </form>
+        <div className="mt-12">
+          <Link
+            href="/waitlist"
+            onClick={() => track('click_intro_cta')}
+            className="inline-block bg-black text-white text-lg px-8 py-4 rounded-full hover:bg-gray-900 transition-colors"
+          >
+            Yes. I want this.
+          </Link>
+        </div>
       </main>
     </div>
   );
