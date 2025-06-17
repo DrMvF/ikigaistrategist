@@ -55,7 +55,7 @@ export default function RadicalWeeklyPage() {
         href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cc1ad90e240001c066f1/monthly"
         onClick={() => {
           if (typeof window !== 'undefined' && window.va) {
-            window.va.track('Subscribe Radical Weekly');
+            window.va('event', { name: 'Subscribe_Radical_Weekly' });
           }
         }}
         className="inline-block rounded-full bg-[#4b4b4b] text-white px-6 py-3 text-base text-center hover:bg-[#5e5e5e] transition-colors"

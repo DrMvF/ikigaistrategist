@@ -60,7 +60,7 @@ export default function OfferPage() {
             href="https://cal.com/radicalsensitiveleadership/clarity-session"
             onClick={() => {
               if (typeof window !== 'undefined' && window.va) {
-                window.va.track('Book_Clarity_Session');
+                window.va('event', { name: 'Book_Clarity_Session' });
               }
             }}
             className="underline text-base hover:opacity-70"
@@ -80,7 +80,7 @@ export default function OfferPage() {
             href="https://cal.com/radicalsensitiveleadership/reset-package"
             onClick={() => {
               if (typeof window !== 'undefined' && window.va) {
-                window.va.track('Book_Reset_Package');
+                window.va('event', { name: 'Book_Reset_Package' });
               }
             }}
             className="underline text-base hover:opacity-70"
@@ -100,7 +100,7 @@ export default function OfferPage() {
             href="mailto:hello@radicalsensitiveleadership.com"
             onClick={() => {
               if (typeof window !== 'undefined' && window.va) {
-                window.va.track('Contact_for_Corporate_Coaching');
+                window.va('event', { name: 'Mail_Corporate_Contact' });
               }
             }}
             className="underline text-base hover:opacity-70"
@@ -137,7 +137,7 @@ export default function OfferPage() {
           href="https://cal.com/radicalsensitiveleadership/intro-call"
           onClick={() => {
             if (typeof window !== 'undefined' && window.va) {
-              window.va.track('Book_Intro_Call');
+              window.va('event', { name: 'Book_Intro_Call' });
             }
           }}
           className="underline text-base hover:opacity-70"
@@ -151,7 +151,7 @@ export default function OfferPage() {
           href="mailto:hello@radicalsensitiveleadership.com"
           onClick={() => {
             if (typeof window !== 'undefined' && window.va) {
-              window.va.track('Write_Email_Contact');
+              window.va('event', { name: 'Mail_Contact_Offer' });
             }
           }}
           className="underline text-base hover:opacity-70"

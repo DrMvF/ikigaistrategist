@@ -51,7 +51,7 @@ export default function FoundingCirclePage() {
         href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cd06d90e240001c066fb/monthly"
         onClick={() => {
           if (typeof window !== 'undefined' && window.va) {
-            window.va.track('Subscribe_Founding_Circle');
+            window.va('event', { name: 'Subscribe_Founding_Circle' });
           }
         }}
         className="inline-block rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base text-center hover:bg-[#ccc] transition-colors"
