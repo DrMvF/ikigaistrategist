@@ -21,7 +21,7 @@ export default function Home() {
           Just for yourself.<br /><br />
           Each morning, you return to that inner compass.<br />
           Each evening, you whisper your truth back into the tool.<br /><br />
-          After seven days, it listens back.<br /><br />
+          After seven days, it listens back.<br />
           You don’t get a grade. You get insight.<br /><br />
           Slowly, steadily, a rhythm emerges.<br />
           A dialogue.<br /><br />
