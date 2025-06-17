@@ -18,6 +18,8 @@ export const metadata = {
   },
 };
 
+import SubscribeButton from '@/components/SubscribeButton';
+
 export default function DeepFlowPage() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-32 font-cm">
@@ -49,21 +51,14 @@ export default function DeepFlowPage() {
       </ul>
 
       <h2 className="text-2xl font-semibold mb-4">Pricing</h2>
-      <p className="text-lg mb-6">
-        €33/month • 7 days free
-      </p>
+      <p className="text-lg mb-6">€33/month • 7 days free</p>
 
-      <a
+      <SubscribeButton
         href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/68138eefb12a490008c707a3/monthly"
-        onClick={() => {
-          if (typeof window !== 'undefined' && typeof window.va === 'function') {
-            window.va('event', { name: 'Subscribe_Deep_Flow' });
-          }
-        }}
-        className="inline-block rounded-full bg-black text-white px-6 py-3 text-base hover:bg-[#383838] transition-colors"
-      >
-        → Subscribe to Deep Flow
-      </a>
+        eventName="Subscribe_Deep_Flow"
+        label="→ Subscribe to Deep Flow"
+        variant="black"
+      />
 
       <div className="mt-16">
         <a href="/" className="text-sm underline hover:opacity-60">

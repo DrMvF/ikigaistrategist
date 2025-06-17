@@ -1,3 +1,5 @@
+import SubscribeButton from '@/components/SubscribeButton';
+
 export const metadata = {
   title: 'Radical Weekly – Radical Sensitive Leadership',
   description:
@@ -51,17 +53,12 @@ export default function RadicalWeeklyPage() {
         €55/month • 14 days free
       </p>
 
-      <a
+      <SubscribeButton
         href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cc1ad90e240001c066f1/monthly"
-        onClick={() => {
-          if (typeof window !== 'undefined' && window.va) {
-            window.va('event', { name: 'Subscribe_Radical_Weekly' });
-          }
-        }}
-        className="inline-block rounded-full bg-[#4b4b4b] text-white px-6 py-3 text-base text-center hover:bg-[#5e5e5e] transition-colors"
-      >
-        → Subscribe to Radical Weekly
-      </a>
+        label="→ Subscribe to Radical Weekly"
+        eventName="Subscribe_Radical_Weekly"
+        className="bg-[#4b4b4b] text-white hover:bg-[#5e5e5e]"
+      />
 
       <div className="mt-16">
         <a href="/" className="text-sm underline hover:opacity-60">

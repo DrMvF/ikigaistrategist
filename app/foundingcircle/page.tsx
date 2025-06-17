@@ -1,3 +1,5 @@
+import SubscribeButton from '@/components/SubscribeButton';
+
 export const metadata = {
   title: 'Founding Circle – Radical Sensitive Leadership',
   description:
@@ -47,17 +49,12 @@ export default function FoundingCirclePage() {
         €222/month • 14 days free
       </p>
 
-      <a
+      <SubscribeButton
         href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cd06d90e240001c066fb/monthly"
-        onClick={() => {
-          if (typeof window !== 'undefined' && window.va) {
-            window.va('event', { name: 'Subscribe_Founding_Circle' });
-          }
-        }}
-        className="inline-block rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base text-center hover:bg-[#ccc] transition-colors"
-      >
-        → Join the Founding Circle
-      </a>
+        label="→ Join the Founding Circle"
+        eventName="Subscribe_Founding_Circle"
+        className="bg-[#e5e5e5] text-black hover:bg-[#ccc]"
+      />
 
       <div className="mt-16">
         <a href="/" className="text-sm underline hover:opacity-60">

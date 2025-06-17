@@ -1,3 +1,5 @@
+import SubscribeButton from '@/components/SubscribeButton';
+
 export const metadata = {
   title: 'Offer White Space – Radical Sensitive Leadership',
   description:
@@ -50,63 +52,54 @@ export default function OfferPage() {
 
       <div className="space-y-10">
         <div>
-          <h3 className="text-xl font-semibold mb-2">Executive Clarity Session – 90 Min – €590 <span className="text-base font-normal">plus VAT</span></h3>
+          <h3 className="text-xl font-semibold mb-2">
+            Executive Clarity Session – 90 Min – €590 <span className="text-base font-normal">plus VAT</span>
+          </h3>
           <ul className="list-disc ml-6 text-base mb-2">
             <li>One deep 1:1 session</li>
             <li>Ideal for acute challenges or orientation</li>
             <li>Optional written summary</li>
           </ul>
-          <a
+          <SubscribeButton
             href="https://cal.com/radicalsensitiveleadership/clarity-session"
-            onClick={() => {
-              if (typeof window !== 'undefined' && window.va) {
-                window.va('event', { name: 'Book_Clarity_Session' });
-              }
-            }}
+            label="→ Book now"
+            eventName="Book_Clarity_Session"
             className="underline text-base hover:opacity-70"
-          >
-            → Book now
-          </a>
+          />
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold mb-2">Strategic Reset Package – 3×60 Min – €1,200 <span className="text-base font-normal">plus VAT</span></h3>
+          <h3 className="text-xl font-semibold mb-2">
+            Strategic Reset Package – 3×60 Min – €1,200 <span className="text-base font-normal">plus VAT</span>
+          </h3>
           <ul className="list-disc ml-6 text-base mb-2">
             <li>Three coaching sessions</li>
             <li>Written reflection & leadership feedback</li>
             <li>For transitions, team challenges or strategy shifts</li>
           </ul>
-          <a
+          <SubscribeButton
             href="https://cal.com/radicalsensitiveleadership/reset-package"
-            onClick={() => {
-              if (typeof window !== 'undefined' && window.va) {
-                window.va('event', { name: 'Book_Reset_Package' });
-              }
-            }}
+            label="→ Book package"
+            eventName="Book_Reset_Package"
             className="underline text-base hover:opacity-70"
-          >
-            → Book package
-          </a>
+          />
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold mb-2">Corporate Coaching Framework – from €6,000 <span className="text-base font-normal">excl. VAT</span></h3>
+          <h3 className="text-xl font-semibold mb-2">
+            Corporate Coaching Framework – from €6,000 <span className="text-base font-normal">excl. VAT</span>
+          </h3>
           <ul className="list-disc ml-6 text-base mb-2">
             <li>5–15 sessions per Key Leader</li>
             <li>HR briefings, optional anonymized reporting</li>
             <li>For sustainable leadership presence</li>
           </ul>
-          <a
+          <SubscribeButton
             href="mailto:hello@radicalsensitiveleadership.com"
-            onClick={() => {
-              if (typeof window !== 'undefined' && window.va) {
-                window.va('event', { name: 'Mail_Corporate_Contact' });
-              }
-            }}
+            label="→ Contact me directly"
+            eventName="Contact_Corporate_Coaching"
             className="underline text-base hover:opacity-70"
-          >
-            → Contact me directly
-          </a>
+          />
         </div>
       </div>
 
@@ -133,31 +126,21 @@ export default function OfferPage() {
       <div className="mt-10">
         <h3 className="text-xl mb-2">Free initial call</h3>
         <p className="mb-2">Let’s speak first, feel the resonance, then decide:</p>
-        <a
+        <SubscribeButton
           href="https://cal.com/radicalsensitiveleadership/intro-call"
-          onClick={() => {
-            if (typeof window !== 'undefined' && window.va) {
-              window.va('event', { name: 'Book_Intro_Call' });
-            }
-          }}
+          label="→ Book a 15-min conversation"
+          eventName="Book_Intro_Call"
           className="underline text-base hover:opacity-70"
-        >
-          → Book a 15-min conversation
-        </a>
+        />
       </div>
 
       <div className="mt-12">
-        <a
+        <SubscribeButton
           href="mailto:hello@radicalsensitiveleadership.com"
-          onClick={() => {
-            if (typeof window !== 'undefined' && window.va) {
-              window.va('event', { name: 'Mail_Contact_Offer' });
-            }
-          }}
+          label="Or write me directly → hello@radicalsensitiveleadership.com"
+          eventName="Write_Miriam_Directly"
           className="underline text-base hover:opacity-70"
-        >
-          Or write me directly → hello@radicalsensitiveleadership.com
-        </a>
+        />
       </div>
 
       <div className="mt-16">
