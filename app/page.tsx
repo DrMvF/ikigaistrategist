@@ -1,3 +1,7 @@
+'use client';
+
+import { track } from '@vercel/analytics';
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen items-center justify-between p-8 sm:p-20 font-cm">
@@ -20,6 +24,7 @@ export default function Home() {
           {/* Deep Flow Button – Black */}
           <a
             href="/deepflow"
+            onClick={() => track('click_deep_flow')}
             className="rounded-full bg-black text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#383838] transition-colors"
           >
             Deep Flow
@@ -28,6 +33,7 @@ export default function Home() {
           {/* Radical Weekly Button – Dark Gray */}
           <a
             href="/radicalweekly"
+            onClick={() => track('click_radical_weekly')}
             className="rounded-full bg-[#4b4b4b] text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#5e5e5e] transition-colors"
           >
             Radical Weekly
@@ -36,6 +42,7 @@ export default function Home() {
           {/* Founding Circle Button – Light Gray */}
           <a
             href="/foundingcircle"
+            onClick={() => track('click_founding_circle')}
             className="rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base sm:text-lg text-center hover:bg-[#ccc] transition-colors"
           >
             Founding Circle
@@ -44,6 +51,7 @@ export default function Home() {
           {/* White Space Button – White border */}
           <a
             href="/offer"
+            onClick={() => track('click_white_space')}
             className="rounded-full border border-black px-6 py-3 text-base sm:text-lg text-center hover:bg-black hover:text-white transition-colors"
           >
             White Space
@@ -91,4 +99,3 @@ export default function Home() {
     </div>
   );
 }
-
