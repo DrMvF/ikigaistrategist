@@ -7,54 +7,30 @@ export default function Home() {
     <div className="flex flex-col min-h-screen items-center justify-between p-8 sm:p-20 font-cm">
       <main className="flex flex-col items-center text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">
-          Radical Sensitive Leadership
+          Ikigai Strategist
         </h1>
-        <p className="text-lg sm:text-xl">Intuition. Intelligence. Integrity.</p>
+
+        <p className="text-lg sm:text-xl">
+          A radically simple, deeply powerful habit tracker
+        </p>
 
         <div className="h-12 sm:h-16" />
 
         <p className="text-base sm:text-lg text-gray-600">
-          Dr. Miriam von Felbert
+          Built in public. Designed for alignment.
         </p>
         <p className="text-base sm:text-lg text-gray-600 mb-12">
-          Deepfluencer. Positive Psychologist. Ikigai Strategist.
+          Thank you for being early.
         </p>
 
         <div className="flex flex-col gap-4 w-full max-w-xs">
-          {/* Deep Flow Button – Black */}
+          {/* Join Waitlist Button – Black */}
           <a
-            href="/deepflow"
-            onClick={() => track('click_deep_flow')}
+            href="https://radicalsensitiveleadership.mailcoach.app/subscribe/ed7af73e-6251-434c-816f-28012afe6452"
+            onClick={() => track('click_waitlist')}
             className="rounded-full bg-black text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#383838] transition-colors"
           >
-            Deep Flow
-          </a>
-
-          {/* Radical Weekly Button – Dark Gray */}
-          <a
-            href="/radicalweekly"
-            onClick={() => track('click_radical_weekly')}
-            className="rounded-full bg-[#4b4b4b] text-white px-6 py-3 text-base sm:text-lg text-center hover:bg-[#5e5e5e] transition-colors"
-          >
-            Radical Weekly
-          </a>
-
-          {/* Founding Circle Button – Light Gray */}
-          <a
-            href="/foundingcircle"
-            onClick={() => track('click_founding_circle')}
-            className="rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base sm:text-lg text-center hover:bg-[#ccc] transition-colors"
-          >
-            Founding Circle
-          </a>
-
-          {/* White Space Button – White border */}
-          <a
-            href="/offer"
-            onClick={() => track('click_white_space')}
-            className="rounded-full border border-black px-6 py-3 text-base sm:text-lg text-center hover:bg-black hover:text-white transition-colors"
-          >
-            White Space
+            Join the Waitlist
           </a>
         </div>
       </main>
@@ -63,39 +39,8 @@ export default function Home() {
         <a href="/legal" className="hover:underline">● Legal Notice</a>
         <a href="/privacy" className="hover:underline">● Privacy Policy</a>
         <a href="/terms" className="hover:underline">● Terms & Conditions</a>
-        <a
-          href="https://www.youtube.com/@DrMiriamvonFelbert"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
-          ● YouTube
-        </a>
-        <a
-          href="https://www.linkedin.com/in/miriamvonfelbert/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
-          ● LinkedIn
-        </a>
-        <a
-          href="https://www.instagram.com/drmiriamvonfelbert"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
-          ● Instagram
-        </a>
-        <a
-          href="https://x.com/DrMvonFelbert"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
-          ● X
-        </a>
       </footer>
     </div>
   );
 }
+
