@@ -1,4 +1,3 @@
-// Seite 1: pages/index.tsx
 'use client';
 
 import { track } from '@vercel/analytics';
@@ -8,10 +7,10 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen justify-center px-6 py-24 sm:py-40 font-cm text-black bg-white">
       <main className="max-w-3xl mx-auto text-center">
-        <h1 className="text-3xl sm:text-5xl font-bold leading-snug mb-8">
+        <h1 className="text-2xl sm:text-4xl font-bold leading-snug mb-10">
           Imagine your day begins with a whisper.
         </h1>
-        <p className="text-lg sm:text-xl leading-relaxed text-gray-700">
+        <p className="text-xl sm:text-2xl leading-relaxed text-black">
           Not with urgency. Not with a checklist.<br />
           But with a soft, spoken intention:<br /><br />
           What you want to love.<br />
@@ -34,11 +33,11 @@ export default function Home() {
           It’s a mirror.
         </p>
 
-        <div className="mt-12">
+        <div className="mt-16">
           <Link
             href="/waitlist"
             onClick={() => track('click_intro_cta')}
-            className="inline-block bg-black text-white text-lg px-8 py-4 rounded-full hover:bg-gray-900 transition-colors"
+            className="inline-block bg-black text-white text-xl px-8 py-4 rounded-full hover:bg-gray-900 transition-colors"
           >
             Yes. I want this.
           </Link>
