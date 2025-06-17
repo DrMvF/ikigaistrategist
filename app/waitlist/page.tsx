@@ -4,27 +4,37 @@ import { track } from '@vercel/analytics/react';
 
 export default function WaitlistPage() {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center p-8 sm:p-20 font-cm">
-      <main className="flex flex-col items-center text-center max-w-xl">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6">
+    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-40 sm:pt-56 font-cm text-black">
+      <main className="flex flex-col items-center text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">
           Ikigai Strategist
         </h1>
-        <p className="text-base sm:text-lg text-gray-800 mb-12">
-          Join the waitlist for the most radically sensitive habit tracker.
+
+        <p className="text-xl sm:text-2xl">
+          A radically simple, deeply powerful habit tracker
+        </p>
+
+        <div className="h-12 sm:h-16" />
+
+        <p className="text-lg sm:text-xl">
+          Built in public. Designed for alignment.
+        </p>
+        <p className="text-lg sm:text-xl mb-12">
+          Thank you for being early.
         </p>
 
         <form
           action="https://radicalsensitiveleadership.mailcoach.app/subscribe/ed7af73e-6251-434c-816f-28012afe6452"
           method="post"
-          className="flex flex-col gap-4 w-full"
-          onSubmit={() => track('submit_waitlist_form')}
+          onSubmit={() => track('click_waitlist')}
+          className="flex flex-col gap-4 w-full max-w-xs"
         >
           <input
             type="email"
             name="email"
-            placeholder="Your email address"
             required
-            className="w-full border border-black px-4 py-3 text-base"
+            placeholder="Your email address"
+            className="w-full border border-black rounded-full px-6 py-3 text-lg sm:text-xl text-center"
           />
           <input
             type="hidden"
@@ -34,7 +44,7 @@ export default function WaitlistPage() {
           <input
             type="submit"
             value="Join the Waitlist"
-            className="w-full rounded-full bg-black text-white px-6 py-3 text-base hover:bg-[#383838] transition-colors cursor-pointer"
+            className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors"
           />
         </form>
       </main>
