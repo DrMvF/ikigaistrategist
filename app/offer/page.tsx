@@ -58,6 +58,11 @@ export default function OfferPage() {
           </ul>
           <a
             href="https://cal.com/radicalsensitiveleadership/clarity-session"
+            onClick={() => {
+              if (typeof window !== 'undefined' && window.va) {
+                window.va.track('Book_Clarity_Session');
+              }
+            }}
             className="underline text-base hover:opacity-70"
           >
             → Book now
@@ -73,6 +78,11 @@ export default function OfferPage() {
           </ul>
           <a
             href="https://cal.com/radicalsensitiveleadership/reset-package"
+            onClick={() => {
+              if (typeof window !== 'undefined' && window.va) {
+                window.va.track('Book_Reset_Package');
+              }
+            }}
             className="underline text-base hover:opacity-70"
           >
             → Book package
@@ -88,6 +98,11 @@ export default function OfferPage() {
           </ul>
           <a
             href="mailto:hello@radicalsensitiveleadership.com"
+            onClick={() => {
+              if (typeof window !== 'undefined' && window.va) {
+                window.va.track('Contact_for_Corporate_Coaching');
+              }
+            }}
             className="underline text-base hover:opacity-70"
           >
             → Contact me directly
@@ -120,6 +135,11 @@ export default function OfferPage() {
         <p className="mb-2">Let’s speak first, feel the resonance, then decide:</p>
         <a
           href="https://cal.com/radicalsensitiveleadership/intro-call"
+          onClick={() => {
+            if (typeof window !== 'undefined' && window.va) {
+              window.va.track('Book_Intro_Call');
+            }
+          }}
           className="underline text-base hover:opacity-70"
         >
           → Book a 15-min conversation
@@ -129,6 +149,11 @@ export default function OfferPage() {
       <div className="mt-12">
         <a
           href="mailto:hello@radicalsensitiveleadership.com"
+          onClick={() => {
+            if (typeof window !== 'undefined' && window.va) {
+              window.va.track('Write_Email_Contact');
+            }
+          }}
           className="underline text-base hover:opacity-70"
         >
           Or write me directly → hello@radicalsensitiveleadership.com

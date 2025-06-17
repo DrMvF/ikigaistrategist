@@ -48,10 +48,15 @@ export default function FoundingCirclePage() {
       </p>
 
       <a
-      href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cd06d90e240001c066fb/monthly"
-      className="inline-block rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base text-center hover:bg-[#ccc] transition-colors"
+        href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/6842cd06d90e240001c066fb/monthly"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.va) {
+            window.va.track('Subscribe_Founding_Circle');
+          }
+        }}
+        className="inline-block rounded-full bg-[#e5e5e5] text-black px-6 py-3 text-base text-center hover:bg-[#ccc] transition-colors"
       >
-      → Join the Founding Circle
+        → Join the Founding Circle
       </a>
 
       <div className="mt-16">

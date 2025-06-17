@@ -56,6 +56,11 @@ export default function DeepFlowPage() {
       <a
         href="https://ghost.radicalsensitiveleadership.com/#/portal/signup/68138eefb12a490008c707a3/monthly"
         className="inline-block rounded-full bg-black text-white px-6 py-3 text-base hover:bg-[#383838] transition-colors"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.va) {
+            window.va.track('Subscribe_Deep_Flow');
+          }
+        }}
       >
         → Subscribe to Deep Flow
       </a>
