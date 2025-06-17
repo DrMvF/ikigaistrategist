@@ -23,15 +23,25 @@ export default function Home() {
           Thank you for being early.
         </p>
 
-        <div className="flex flex-col gap-4 w-full max-w-xs">
-          <a
-            href="https://radicalsensitiveleadership.mailcoach.app/subscribe/ed7af73e-6251-434c-816f-28012afe6452"
-            onClick={() => track('click_waitlist')}
-            className="rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors"
-          >
-            Join the Waitlist
-          </a>
-        </div>
+        <form
+          action="https://radicalsensitiveleadership.mailcoach.app/subscribe/ed7af73e-6251-434c-816f-28012afe6452"
+          method="post"
+          onSubmit={() => track('click_waitlist')}
+          className="flex flex-col gap-4 w-full max-w-xs"
+        >
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Your email address"
+            className="w-full border border-black rounded-full px-6 py-3 text-lg sm:text-xl text-center"
+          />
+          <input
+            type="submit"
+            value="Join the Waitlist"
+            className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors"
+          />
+        </form>
       </main>
     </div>
   );
