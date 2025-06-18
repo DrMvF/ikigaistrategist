@@ -1,9 +1,10 @@
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import JournalClient from './JournalClient';
 
 export default async function JournalPage() {
-  const { userId } = auth();
+  const session = await auth(); // ⬅️ await notwendig
+  const userId = session?.userId;
 
   if (!userId) {
     redirect('/sign-in');
