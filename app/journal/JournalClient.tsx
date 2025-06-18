@@ -1,23 +1,18 @@
 'use client';
 
-// ⬇️ TypeScript: Web Speech API global deklarieren
+import { useEffect, useRef, useState } from 'react';
+import { track } from '@vercel/analytics';
+
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
   }
-
-  interface SpeechRecognitionEvent extends Event {
-    results: SpeechRecognitionResultList;
-  }
 }
-
-import { useState, useEffect, useRef } from 'react';
-import { track } from '@vercel/analytics';
 
 export default function JournalClient() {
   const [entry, setEntry] = useState('');
   const [listening, setListening] = useState(false);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
@@ -26,9 +21,9 @@ export default function JournalClient() {
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
+      recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
-        setEntry((prev) => (prev ? `${prev} ` : '') + transcript);
+        setEntry((prev) => (prev ? prev + ' ' : '') + transcript);
       };
 
       recognition.onend = () => {
