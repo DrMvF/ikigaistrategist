@@ -1,11 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { useAuth } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
-import { track } from '@vercel/analytics';
-
-// ⬇️ Saubere TypeScript-Deklaration für Web Speech API
+// ⬇️ TypeScript: Web Speech API global deklarieren
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
@@ -16,21 +11,13 @@ declare global {
   }
 }
 
-type SpeechRecognition = typeof window.webkitSpeechRecognition;
+import { useState, useEffect, useRef } from 'react';
+import { track } from '@vercel/analytics';
 
-export default function JournalPage() {
-  const { userId } = useAuth();
-  const router = useRouter();
-
+export default function JournalClient() {
   const [entry, setEntry] = useState('');
   const [listening, setListening] = useState(false);
-  const recognitionRef = useRef<InstanceType<SpeechRecognition> | null>(null);
-
-  useEffect(() => {
-    if (!userId) {
-      router.push('/sign-in');
-    }
-  }, [userId]);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
@@ -41,7 +28,7 @@ export default function JournalPage() {
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
-        setEntry((prev) => (prev ? prev + ' ' : '') + transcript);
+        setEntry((prev) => (prev ? `${prev} ` : '') + transcript);
       };
 
       recognition.onend = () => {
