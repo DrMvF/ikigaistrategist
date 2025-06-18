@@ -1,21 +1,36 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useAuth } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 import { track } from '@vercel/analytics';
 
-// ⬇️ Saubere globale Typisierung
+// ⬇️ Saubere TypeScript-Deklaration für Web Speech API
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
+  }
+
+  interface SpeechRecognitionEvent extends Event {
+    results: SpeechRecognitionResultList;
   }
 }
 
 type SpeechRecognition = typeof window.webkitSpeechRecognition;
 
-export default function JournalClient() {
+export default function JournalPage() {
+  const { userId } = useAuth();
+  const router = useRouter();
+
   const [entry, setEntry] = useState('');
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<InstanceType<SpeechRecognition> | null>(null);
+
+  useEffect(() => {
+    if (!userId) {
+      router.push('/sign-in');
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
@@ -24,9 +39,9 @@ export default function JournalClient() {
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
-        setEntry((prev) => (prev ? `${prev} ` : '') + transcript);
+        setEntry((prev) => (prev ? prev + ' ' : '') + transcript);
       };
 
       recognition.onend = () => {
@@ -65,22 +80,21 @@ export default function JournalClient() {
             placeholder="Speak or write your intention..."
             rows={10}
             className="w-full rounded-lg border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white px-4 py-3 text-lg leading-relaxed"
-            aria-label="Journal entry"
           />
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+          <div className="flex items-center gap-4 mt-4">
             <button
               type="button"
               onClick={handleStartListening}
               disabled={listening}
-              className="px-6 py-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded-full text-base hover:opacity-80 transition"
+              className="px-6 py-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded-full text-base hover:opacity-80 transition-colors"
             >
               {listening ? 'Listening…' : 'Speak Instead'}
             </button>
 
             <button
               type="submit"
-              className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full text-base hover:opacity-80 transition"
+              className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full text-base hover:opacity-80 transition-colors"
             >
               Save Entry
             </button>
