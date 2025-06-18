@@ -4,7 +4,7 @@ import { track } from '@vercel/analytics/react';
 
 export default function WaitlistPage() {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-40 sm:pt-56 font-cm text-black dark:text-white">
+    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-40 sm:pt-56 font-cm text-black dark:text-white bg-white dark:bg-black">
       <main className="flex flex-col items-center text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">
           Ikigai Strategist
@@ -44,7 +44,7 @@ export default function WaitlistPage() {
           <input
             type="submit"
             value="Join the Waitlist"
-            className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] dark:hover:bg-[#1a1a1a] transition-colors"
+            className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
           />
         </form>
       </main>
