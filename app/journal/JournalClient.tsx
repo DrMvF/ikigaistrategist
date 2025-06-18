@@ -1,6 +1,9 @@
 'use client';
 
-// ⬇️ Saubere TypeScript-Deklaration für Web Speech API
+import { useEffect, useRef, useState } from 'react';
+import { track } from '@vercel/analytics';
+
+// ⬇️ Saubere globale Typisierung
 declare global {
   interface Window {
     webkitSpeechRecognition: any;
@@ -8,9 +11,6 @@ declare global {
 }
 
 type SpeechRecognition = typeof window.webkitSpeechRecognition;
-
-import { useEffect, useRef, useState } from 'react';
-import { track } from '@vercel/analytics';
 
 export default function JournalClient() {
   const [entry, setEntry] = useState('');
@@ -24,9 +24,9 @@ export default function JournalClient() {
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
+      recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
-        setEntry((prev) => (prev ? prev + ' ' : '') + transcript);
+        setEntry((prev) => (prev ? `${prev} ` : '') + transcript);
       };
 
       recognition.onend = () => {
@@ -65,21 +65,22 @@ export default function JournalClient() {
             placeholder="Speak or write your intention..."
             rows={10}
             className="w-full rounded-lg border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white px-4 py-3 text-lg leading-relaxed"
+            aria-label="Journal entry"
           />
 
-          <div className="flex items-center gap-4 mt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
             <button
               type="button"
               onClick={handleStartListening}
               disabled={listening}
-              className="px-6 py-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded-full text-base hover:opacity-80 transition-colors"
+              className="px-6 py-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded-full text-base hover:opacity-80 transition"
             >
               {listening ? 'Listening…' : 'Speak Instead'}
             </button>
 
             <button
               type="submit"
-              className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full text-base hover:opacity-80 transition-colors"
+              className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full text-base hover:opacity-80 transition"
             >
               Save Entry
             </button>
