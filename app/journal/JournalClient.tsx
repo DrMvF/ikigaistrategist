@@ -1,24 +1,32 @@
 'use client';
 
+// ⬇️ Saubere TypeScript-Deklaration für Web Speech API
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+  }
+}
+
+type SpeechRecognition = typeof window.webkitSpeechRecognition;
+
 import { useEffect, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 
 export default function JournalClient() {
   const [entry, setEntry] = useState('');
   const [listening, setListening] = useState(false);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<InstanceType<SpeechRecognition> | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = window.webkitSpeechRecognition as any;
-      const recognition = new SpeechRecognition();
+      const recognition = new window.webkitSpeechRecognition();
       recognition.lang = 'en-US';
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
-        setEntry(prev => prev + (prev ? ' ' : '') + transcript);
+        setEntry((prev) => (prev ? prev + ' ' : '') + transcript);
       };
 
       recognition.onend = () => {
