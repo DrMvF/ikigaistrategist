@@ -5,12 +5,12 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen justify-center px-6 py-24 sm:py-40 font-cm text-black bg-white">
+    <div className="flex flex-col min-h-screen justify-center px-6 py-24 sm:py-40 font-cm text-black bg-white dark:text-white dark:bg-black">
       <main className="max-w-3xl mx-auto text-center">
         <h1 className="text-2xl sm:text-4xl font-bold leading-snug mb-10">
           Imagine your day begins with a whisper.
         </h1>
-        <p className="text-xl sm:text-2xl leading-relaxed text-black">
+        <p className="text-xl sm:text-2xl leading-relaxed">
           Not with urgency. Not with a checklist.<br />
           But with a soft, spoken intention:<br /><br />
           What you want to love.<br />
@@ -37,7 +37,7 @@ export default function Home() {
           <Link
             href="/waitlist"
             onClick={() => track('click_intro_cta')}
-            className="inline-block bg-black text-white text-xl px-8 py-4 rounded-full hover:bg-gray-900 transition-colors"
+            className="inline-block bg-black text-white text-xl px-8 py-4 rounded-full hover:bg-gray-900 transition-colors dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
           >
             Yes. I want this.
           </Link>
