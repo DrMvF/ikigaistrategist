@@ -13,6 +13,7 @@ export default function JournalClient() {
   const [entry, setEntry] = useState('');
   const [listening, setListening] = useState(false);
   const [reflection, setReflection] = useState('');
+  const [isReflecting, setIsReflecting] = useState(false);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -52,15 +53,22 @@ export default function JournalClient() {
   };
 
   const handleReflect = async () => {
-    track('click_reflect');
-    const response = await fetch('/api/reflect', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: entry }),
-    });
-
-    const data = await response.json();
-    setReflection(data.result);
+    setIsReflecting(true);
+    setReflection('');
+    try {
+      const response = await fetch('/api/reflect', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entry }),
+      });
+      const data = await response.json();
+      setReflection(data.message || 'No reflection received.');
+    } catch (error) {
+      console.error(error);
+      setReflection('Something went wrong while reflecting.');
+    } finally {
+      setIsReflecting(false);
+    }
   };
 
   return (
@@ -98,17 +106,18 @@ export default function JournalClient() {
             <button
               type="button"
               onClick={handleReflect}
-              className="px-6 py-3 bg-purple-600 text-white rounded-full text-base hover:opacity-80 transition-colors"
+              disabled={isReflecting}
+              className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-full text-base hover:opacity-80 transition-colors"
             >
-              Reflect
+              {isReflecting ? 'Reflecting…' : 'Reflect'}
             </button>
           </div>
         </form>
 
         {reflection && (
-          <div className="mt-8 p-4 border-l-4 border-purple-600 bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100">
-            <h2 className="text-lg font-semibold mb-2">AI Reflection</h2>
-            <p className="whitespace-pre-line">{reflection}</p>
+          <div className="mt-8 p-4 border border-dashed border-gray-400 dark:border-gray-600 rounded-lg text-base leading-relaxed bg-gray-50 dark:bg-gray-900">
+            <h2 className="text-xl font-semibold mb-2">Reflection</h2>
+            <p>{reflection}</p>
           </div>
         )}
       </main>
