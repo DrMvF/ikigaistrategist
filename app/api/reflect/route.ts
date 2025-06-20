@@ -3,13 +3,13 @@ import { OpenAI } from "openai";
 export const runtime = "edge";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 export async function POST(req: Request) {
-  const { input } = await req.json();
+  const { entry } = await req.json(); // 🛠️ hier war vorher "input"
 
-  if (!input || input.trim() === "") {
+  if (!entry || entry.trim() === "") {
     return new Response("No input provided", { status: 400 });
   }
 
@@ -18,16 +18,20 @@ export async function POST(req: Request) {
     messages: [
       {
         role: "system",
-        content: "You are a gentle, insightful guide. Reflect what the user wrote as if you were mirroring their inner world, using soft and poetic language.",
+        content:
+          "You are a gentle, insightful guide. Reflect what the user wrote as if you were mirroring their inner world, using soft and poetic language.",
       },
       {
         role: "user",
-        content: input,
+        content: entry,
       },
     ],
   });
 
   const response = completion.choices[0]?.message?.content || "";
 
-  return new Response(JSON.stringify({ reflection: response }));
+  return new Response(JSON.stringify({ reflection: response }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
