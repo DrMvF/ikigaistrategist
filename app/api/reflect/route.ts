@@ -8,11 +8,12 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { input } = await req.json();
+    const { entry } = await req.json();
 
-    if (!input || input.trim() === "") {
+    if (!entry || entry.trim() === "") {
       return new Response(JSON.stringify({ error: "No input provided." }), {
         status: 400,
+        headers: { 'Content-Type': 'application/json' },
       });
     }
 
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
         },
         {
           role: "user",
-          content: input,
+          content: entry,
         },
       ],
     });
@@ -34,18 +35,21 @@ export async function POST(req: Request) {
     const reflection = completion.choices[0]?.message?.content;
 
     if (!reflection) {
-      return new Response(JSON.stringify({ error: "No reflection received." }), {
+      return new Response(JSON.stringify({ error: "No reflection generated." }), {
         status: 500,
+        headers: { 'Content-Type': 'application/json' },
       });
     }
 
     return new Response(JSON.stringify({ reflection }), {
       status: 200,
+      headers: { 'Content-Type': 'application/json' },
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Reflection error:", error);
     return new Response(JSON.stringify({ error: "Reflection failed." }), {
       status: 500,
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 }
