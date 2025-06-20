@@ -6,13 +6,14 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const input = body.input;
+    const { input } = await req.json();
 
     if (!input || input.trim() === "") {
-      return new Response(JSON.stringify({ error: "No input provided" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "No input provided." }), {
+        status: 400,
+      });
     }
 
     const completion = await openai.chat.completions.create({
@@ -20,7 +21,8 @@ export async function POST(request: Request) {
       messages: [
         {
           role: "system",
-          content: "You are a gentle, insightful guide. Reflect what the user wrote as if you were mirroring their inner world, using soft and poetic language.",
+          content:
+            "You are a gentle, insightful guide. Reflect what the user wrote as if you were mirroring their inner world, using soft and poetic language.",
         },
         {
           role: "user",
@@ -29,12 +31,21 @@ export async function POST(request: Request) {
       ],
     });
 
-    const response = completion.choices[0]?.message?.content || "";
+    const reflection = completion.choices[0]?.message?.content;
 
-    return new Response(JSON.stringify({ reflection: response }), {
-      headers: { "Content-Type": "application/json" },
+    if (!reflection) {
+      return new Response(JSON.stringify({ error: "No reflection received." }), {
+        status: 500,
+      });
+    }
+
+    return new Response(JSON.stringify({ reflection }), {
+      status: 200,
     });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: "Reflection failed." }), { status: 500 });
+  } catch (error: any) {
+    console.error("Reflection error:", error);
+    return new Response(JSON.stringify({ error: "Reflection failed." }), {
+      status: 500,
+    });
   }
 }
