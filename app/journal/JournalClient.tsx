@@ -55,16 +55,31 @@ export default function JournalClient() {
   const handleReflect = async () => {
     setIsReflecting(true);
     setReflection('');
+    track('click_reflect_button');
+
     try {
       const response = await fetch('/api/reflect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entry }),
+        body: JSON.stringify({ input: entry }),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Reflect failed:', errorText);
+        setReflection('Something went wrong while reflecting.');
+        return;
+      }
+
       const data = await response.json();
-      setReflection(data.message || 'No reflection received.');
+
+      if (data.reflection) {
+        setReflection(data.reflection);
+      } else {
+        setReflection('No reflection received.');
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Reflect error:', error);
       setReflection('Something went wrong while reflecting.');
     } finally {
       setIsReflecting(false);
