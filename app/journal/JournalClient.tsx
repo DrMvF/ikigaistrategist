@@ -12,6 +12,7 @@ declare global {
 export default function JournalClient() {
   const [entry, setEntry] = useState('');
   const [listening, setListening] = useState(false);
+  const [reflection, setReflection] = useState('');
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -47,6 +48,19 @@ export default function JournalClient() {
     track('click_journal_submit');
     alert('Saved (noch nicht persistent)');
     setEntry('');
+    setReflection('');
+  };
+
+  const handleReflect = async () => {
+    track('click_reflect');
+    const response = await fetch('/api/reflect', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: entry }),
+    });
+
+    const data = await response.json();
+    setReflection(data.result);
   };
 
   return (
@@ -64,7 +78,7 @@ export default function JournalClient() {
             className="w-full rounded-lg border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white px-4 py-3 text-lg leading-relaxed"
           />
 
-          <div className="flex items-center gap-4 mt-4">
+          <div className="flex items-center gap-4 mt-4 flex-wrap">
             <button
               type="button"
               onClick={handleStartListening}
@@ -80,8 +94,23 @@ export default function JournalClient() {
             >
               Save Entry
             </button>
+
+            <button
+              type="button"
+              onClick={handleReflect}
+              className="px-6 py-3 bg-purple-600 text-white rounded-full text-base hover:opacity-80 transition-colors"
+            >
+              Reflect
+            </button>
           </div>
         </form>
+
+        {reflection && (
+          <div className="mt-8 p-4 border-l-4 border-purple-600 bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100">
+            <h2 className="text-lg font-semibold mb-2">AI Reflection</h2>
+            <p className="whitespace-pre-line">{reflection}</p>
+          </div>
+        )}
       </main>
     </div>
   );
