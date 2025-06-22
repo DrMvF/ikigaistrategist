@@ -46,10 +46,10 @@ export default function JournalClient() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    track('click_journal_submit');
-    alert('Saved (noch nicht persistent)');
-    setEntry('');
-    setReflection('');
+      track('click_journal_submit');
+      alert('Your entry has not been stored. No data is saved yet – database connection will be added soon.');
+      setEntry('');
+      setReflection('');
   };
 
   const handleReflect = async () => {
