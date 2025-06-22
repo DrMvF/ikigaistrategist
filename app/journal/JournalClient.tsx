@@ -58,10 +58,10 @@ export default function JournalClient() {
     track('click_reflect_button');
 
     try {
-      const response = await fetch('/api/reflect', {
+        const response = await fetch('/api/reflect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input: entry }),
+        body: JSON.stringify({ entry }), // ✅ Jetzt korrekt
       });
 
       if (!response.ok) {
