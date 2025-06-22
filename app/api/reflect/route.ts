@@ -1,6 +1,6 @@
 import { OpenAI } from 'openai';
 
-export const runtime = 'nodejs'; // ← klassische Umgebung statt Edge Runtime
+export const runtime = 'nodejs';
 
 const apiKey = process.env.OPENAI_API_KEY;
 
@@ -51,9 +51,12 @@ export async function POST(req: Request) {
     });
   } catch (error: any) {
     console.error('Reflection error:', error?.message ?? error);
-    return new Response(JSON.stringify({ error: 'Reflection failed.' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({ error: `Reflection failed: ${error?.message ?? error}` }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 }
