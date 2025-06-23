@@ -1,5 +1,15 @@
 import { NextRequest } from 'next/server';
-import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
+import puppeteer from 'puppeteer-core';
+
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -69,18 +79,19 @@ export async function POST(req: NextRequest) {
         <body>
           <h1>My Daily Whisper</h1>
           <div class="timestamp">${new Date().toLocaleString()}</div>
-
           <h2>Input</h2>
-          <p>${input}</p>
-
+          <p>${escapeHtml(input)}</p>
           <h2>Reflection</h2>
-          <p>${reflection}</p>
+          <p>${escapeHtml(reflection)}</p>
         </body>
       </html>
     `;
 
     const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
     });
 
     const page = await browser.newPage();
