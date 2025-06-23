@@ -14,7 +14,6 @@ export default function JournalClient() {
   const [listening, setListening] = useState(false);
   const [reflection, setReflection] = useState('');
   const [isReflecting, setIsReflecting] = useState(false);
-  const [savedId, setSavedId] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -66,10 +65,9 @@ export default function JournalClient() {
         return;
       }
 
-      const data = await response.json();
-      setSavedId(data.id);
-
       alert('Your entry was saved successfully.');
+      setEntry('');
+      setReflection('');
     } catch (error) {
       console.error('Save error:', error);
       alert('Something went wrong while saving.');
@@ -110,10 +108,29 @@ export default function JournalClient() {
     }
   };
 
-  const handleExportPdf = () => {
-    if (savedId) {
+  const handleExportPdf = async () => {
+    try {
       track('click_export_pdf');
-      window.open(`/api/export-pdf?id=${savedId}`, '_blank');
+
+      const response = await fetch('/api/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          input: entry,
+          reflection,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('PDF export failed');
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Export error:', error);
+      alert('Something went wrong while exporting the PDF.');
     }
   };
 
@@ -132,7 +149,7 @@ export default function JournalClient() {
             className="w-full rounded-lg border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white px-4 py-3 text-lg leading-relaxed"
           />
 
-          <div className="flex flex-wrap gap-4 mt-4">
+          <div className="flex flex-wrap gap-4 mt-4 items-center">
             <button
               type="button"
               onClick={handleStartListening}
@@ -158,7 +175,7 @@ export default function JournalClient() {
               {isReflecting ? 'Reflecting…' : 'Reflect'}
             </button>
 
-            {savedId && (
+            {reflection && (
               <button
                 type="button"
                 onClick={handleExportPdf}
