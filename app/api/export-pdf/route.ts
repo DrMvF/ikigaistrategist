@@ -15,6 +15,10 @@ export async function GET(req: NextRequest) {
     return new Response('Entry not found', { status: 404 });
   }
 
+  const createdAtString = entry.createdAt
+    ? new Date(entry.createdAt).toLocaleString()
+    : 'No timestamp available';
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -74,7 +78,7 @@ export async function GET(req: NextRequest) {
       </head>
       <body>
         <h1>My Daily Whisper</h1>
-        <div class="timestamp">${new Date(entry.createdAt).toLocaleString()}</div>
+        <div class="timestamp">${createdAtString}</div>
 
         <h2>Input</h2>
         <p>${entry.inputText}</p>
