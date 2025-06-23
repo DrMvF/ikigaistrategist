@@ -108,6 +108,32 @@ export default function JournalClient() {
     }
   };
 
+  const handleExportPdf = async () => {
+    try {
+      track('click_export_pdf');
+
+      const response = await fetch('/api/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          input: entry,
+          reflection,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('PDF export failed');
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Export error:', error);
+      alert('Something went wrong while exporting the PDF.');
+    }
+  };
+
   return (
     <div className="min-h-screen px-6 py-24 font-cm text-black bg-white dark:text-white dark:bg-black">
       <main className="max-w-prose mx-auto text-left">
@@ -123,19 +149,19 @@ export default function JournalClient() {
             className="w-full rounded-lg border border-black dark:border-white bg-white dark:bg-black text-black dark:text-white px-4 py-3 text-lg leading-relaxed"
           />
 
-          <div className="flex items-center gap-4 mt-4 flex-wrap">
+          <div className="flex flex-wrap gap-4 mt-4">
             <button
               type="button"
               onClick={handleStartListening}
               disabled={listening}
-              className="px-6 py-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded-full text-base hover:opacity-80 transition-colors"
+              className="px-6 py-3 bg-white text-black border border-black rounded-full text-base hover:opacity-80 transition-colors"
             >
               {listening ? 'Listening…' : 'Speak Instead'}
             </button>
 
             <button
               type="submit"
-              className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full text-base hover:opacity-80 transition-colors"
+              className="px-6 py-3 bg-black text-white border border-black rounded-full text-base hover:opacity-80 transition-colors"
             >
               Save Entry
             </button>
@@ -144,9 +170,17 @@ export default function JournalClient() {
               type="button"
               onClick={handleReflect}
               disabled={isReflecting}
-              className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-full text-base hover:opacity-80 transition-colors"
+              className="px-6 py-3 bg-gray-700 text-white border border-black rounded-full text-base hover:opacity-80 transition-colors"
             >
               {isReflecting ? 'Reflecting…' : 'Reflect'}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleExportPdf}
+              className="px-6 py-3 bg-gray-200 text-black border border-black rounded-full text-base hover:opacity-80 transition-colors"
+            >
+              Export as PDF
             </button>
           </div>
         </form>
