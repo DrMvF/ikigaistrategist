@@ -65,7 +65,6 @@ export default function JournalClient() {
         return;
       }
 
-      // 🟢 Erfolgsmeldung, aber Felder werden NICHT geleert
       console.log('Entry saved successfully.');
       alert('Your entry was saved successfully.');
     } catch (error) {
@@ -108,30 +107,9 @@ export default function JournalClient() {
     }
   };
 
-  const handleExportPdf = async () => {
-    try {
-      track('click_export_pdf');
-
-      const response = await fetch('/api/export-pdf', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          input: entry,
-          reflection,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('PDF export failed');
-      }
-
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-    } catch (error) {
-      console.error('Export error:', error);
-      alert('Something went wrong while exporting the PDF.');
-    }
+  // Neue Dummy-Funktion für PDF Button
+  const handleExportPdf = () => {
+    alert('Export function coming soon');
   };
 
   return (
