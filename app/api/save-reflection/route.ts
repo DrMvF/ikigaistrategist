@@ -6,16 +6,16 @@ import { auth } from "@clerk/nextjs/server";
 export async function POST(req: NextRequest) {
   const { userId } = await auth();
   const body = await req.json();
-  const { input, reflection } = body;
+  const { entry, reflection } = body;
 
-  if (!userId || !input || !reflection) {
+  if (!userId || !entry || !reflection) {
     return NextResponse.json({ error: "Missing data" }, { status: 400 });
   }
 
   await db.insert(reflections).values({
     id: crypto.randomUUID(),
     userId,
-    inputText: input,
+    inputText: entry, // <-- hier statt "input"
     reflectionText: reflection,
     environment: process.env.VERCEL_ENV === "production" ? "prod" : "dev",
     createdAt: new Date()
