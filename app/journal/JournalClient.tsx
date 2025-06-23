@@ -14,6 +14,7 @@ export default function JournalClient() {
   const [listening, setListening] = useState(false);
   const [reflection, setReflection] = useState('');
   const [isReflecting, setIsReflecting] = useState(false);
+  const [savedId, setSavedId] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -65,9 +66,10 @@ export default function JournalClient() {
         return;
       }
 
+      const data = await response.json();
+      setSavedId(data.id);
+
       alert('Your entry was saved successfully.');
-      setEntry('');
-      setReflection('');
     } catch (error) {
       console.error('Save error:', error);
       alert('Something went wrong while saving.');
@@ -108,29 +110,10 @@ export default function JournalClient() {
     }
   };
 
-  const handleExportPdf = async () => {
-    try {
+  const handleExportPdf = () => {
+    if (savedId) {
       track('click_export_pdf');
-
-      const response = await fetch('/api/export-pdf', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          input: entry,
-          reflection,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('PDF export failed');
-      }
-
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-    } catch (error) {
-      console.error('Export error:', error);
-      alert('Something went wrong while exporting the PDF.');
+      window.open(`/api/export-pdf?id=${savedId}`, '_blank');
     }
   };
 
@@ -175,13 +158,15 @@ export default function JournalClient() {
               {isReflecting ? 'Reflecting…' : 'Reflect'}
             </button>
 
-            <button
-              type="button"
-              onClick={handleExportPdf}
-              className="px-6 py-3 bg-gray-200 text-black border border-black rounded-full text-base hover:opacity-80 transition-colors"
-            >
-              Export as PDF
-            </button>
+            {savedId && (
+              <button
+                type="button"
+                onClick={handleExportPdf}
+                className="px-6 py-3 bg-gray-200 text-black border border-black rounded-full text-base hover:opacity-80 transition-colors"
+              >
+                PDF
+              </button>
+            )}
           </div>
         </form>
 
