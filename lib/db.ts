@@ -1,12 +1,15 @@
 import { drizzle } from 'drizzle-orm/mysql2';
 import mysql from 'mysql2/promise';
-import { schema } from '@/drizzle/schema';
+import { reflections } from '@/drizzle/schema';
 
-const connectionPromise = mysql.createConnection({
+const connection = await mysql.createConnection({
   uri: process.env.DATABASE_URL!,
   ssl: {
     rejectUnauthorized: true,
   },
 });
 
-export const db = drizzle(await connectionPromise, { schema });
+export const db = drizzle(connection, {
+  schema: { reflections },
+  mode: 'default', // ← Pflichtfeld ab drizzle-orm v0.30
+});
