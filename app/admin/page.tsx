@@ -1,36 +1,35 @@
-import { auth } from "@clerk/nextjs/server";
+
 import { db } from "@/lib/db";
 import { reflections } from "@/drizzle/schema";
 import { desc } from "drizzle-orm";
-import { notFound } from "next/navigation";
 
 export default async function AdminPage() {
-  const { userId } = await auth();
-
-  if (userId !== process.env.ADMIN_USER_ID) {
-    notFound(); // oder redirect('/')
-  }
-
-  const entries = await db
-    .select()
-    .from(reflections)
-    .orderBy(desc(reflections.createdAt));
+  const entries = await db.select().from(reflections).orderBy(desc(reflections.createdAt));
 
   return (
-    <div className="p-8 max-w-3xl mx-auto font-cm">
-      <h1 className="text-3xl font-bold mb-6">Saved Reflections</h1>
-      <ul className="space-y-4">
-        {entries.map((entry) => (
-          <li key={entry.id} className="border border-gray-300 p-4 rounded">
-            <p className="text-sm text-gray-500">{entry.createdAt.toString()}</p>
-            <p className="mt-2 whitespace-pre-wrap">
-              <strong>Input:</strong> {entry.inputText}
-              <br />
-              <strong>Reflection:</strong> {entry.reflectionText}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-screen px-6 py-24 font-cm bg-white text-black dark:bg-black dark:text-white">
+      <main className="max-w-prose mx-auto">
+        <h1 className="text-3xl font-bold mb-6">Admin: Saved Reflections</h1>
+
+        {entries.length === 0 ? (
+          <p className="text-gray-500">No entries found.</p>
+        ) : (
+          <ul className="space-y-6">
+            {entries.map((entry) => (
+              <li key={entry.id} className="border border-gray-300 dark:border-gray-700 p-4 rounded">
+                <p className="text-sm text-gray-500">
+                  {entry.createdAt ? new Date(entry.createdAt).toLocaleString() : 'No timestamp'}
+                </p>
+                <p className="mt-2 whitespace-pre-wrap">
+                  <strong>Input:</strong> {entry.inputText}
+                  <br />
+                  <strong>Reflection:</strong> {entry.reflectionText}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
     </div>
   );
 }
