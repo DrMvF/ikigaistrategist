@@ -24,6 +24,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.2",
+    "drizzle-orm": "^0.44.2",
+    "mysql2": "^3.14.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

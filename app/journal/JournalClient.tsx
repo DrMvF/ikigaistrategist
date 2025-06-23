@@ -44,12 +44,34 @@ export default function JournalClient() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-      track('click_journal_submit');
-      alert('Your entry has not been stored. No data is saved yet – database connection will be added soon.');
+    track('click_journal_submit');
+
+    try {
+      const response = await fetch('/api/save-reflection', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          entry,
+          reflection,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Save failed:', errorText);
+        alert('Something went wrong while saving your entry.');
+        return;
+      }
+
+      alert('Your entry was saved successfully.');
       setEntry('');
       setReflection('');
+    } catch (error) {
+      console.error('Save error:', error);
+      alert('Something went wrong while saving.');
+    }
   };
 
   const handleReflect = async () => {
@@ -58,10 +80,10 @@ export default function JournalClient() {
     track('click_reflect_button');
 
     try {
-        const response = await fetch('/api/reflect', {
+      const response = await fetch('/api/reflect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entry }), // ✅ Jetzt korrekt
+        body: JSON.stringify({ entry }),
       });
 
       if (!response.ok) {
