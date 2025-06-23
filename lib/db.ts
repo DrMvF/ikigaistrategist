@@ -1,10 +1,12 @@
-import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2/promise";
-import * as schema from "@/drizzle/schema";
+import { drizzle } from 'drizzle-orm/mysql2';
+import mysql from 'mysql2/promise';
+import { schema } from '@/drizzle/schema';
 
 const connection = await mysql.createConnection({
-  uri: process.env.DATABASE_URL!
+  uri: process.env.DATABASE_URL!,
+  ssl: {
+    rejectUnauthorized: true,
+  },
 });
 
-export const db = drizzle(connection, { schema, mode: 'planetscale' });
-
+export const db = drizzle(connection, { schema });
