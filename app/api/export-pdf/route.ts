@@ -15,9 +15,12 @@ export async function GET(req: NextRequest) {
     return new Response('Entry not found', { status: 404 });
   }
 
-  const createdAtString = entry.createdAt
-    ? new Date(entry.createdAt).toLocaleString()
-    : 'No timestamp available';
+  const createdAtString =
+    entry.createdAt && typeof entry.createdAt === 'string'
+      ? new Date(entry.createdAt).toLocaleString()
+      : entry.createdAt instanceof Date
+        ? entry.createdAt.toLocaleString()
+        : 'No timestamp available';
 
   const html = `
     <!DOCTYPE html>
