@@ -4,7 +4,7 @@ import { reflections } from "@/drizzle/schema";
 import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
-  const { userId } = auth();
+  const { userId } = await auth();
   const body = await req.json();
   const { input, reflection } = body;
 
