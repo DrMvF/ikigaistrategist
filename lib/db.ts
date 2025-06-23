@@ -6,4 +6,5 @@ const connection = await mysql.createConnection({
   uri: process.env.DATABASE_URL!
 });
 
-export const db = drizzle(connection, { schema });
+export const db = drizzle(connection, { schema, mode: 'planetscale' });
+
