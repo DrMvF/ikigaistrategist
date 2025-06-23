@@ -1,11 +1,14 @@
-import type { Config } from "drizzle-kit";
-export default {
+import { config } from "dotenv";
+import { defineConfig } from "drizzle-kit";
+
+config({ path: ".env.local" }); // liest gezielt die .env.local – alternativ: config();
+
+export default defineConfig({
   schema: "./drizzle/schema.ts",
   out: "./drizzle/migrations",
   dialect: "mysql",
   dbCredentials: {
     host: process.env.DATABASE_HOST!,
-    port: 3306,
     user: process.env.DATABASE_USER!,
     password: process.env.DATABASE_PASSWORD!,
     database: process.env.DATABASE_NAME!,
@@ -13,4 +16,4 @@ export default {
       rejectUnauthorized: true,
     },
   },
-} satisfies Config;
+});
