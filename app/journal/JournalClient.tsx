@@ -65,9 +65,9 @@ export default function JournalClient() {
         return;
       }
 
+      // 🟢 Erfolgsmeldung, aber Felder werden NICHT geleert
+      console.log('Entry saved successfully.');
       alert('Your entry was saved successfully.');
-      setEntry('');
-      setReflection('');
     } catch (error) {
       console.error('Save error:', error);
       alert('Something went wrong while saving.');
@@ -170,7 +170,7 @@ export default function JournalClient() {
               type="button"
               onClick={handleReflect}
               disabled={isReflecting}
-              className="px-6 py-3 bg-gray-700 text-white border border-black rounded-full text-base hover:opacity-80 transition-colors"
+              className="px-6 py-3 bg-gray-500 text-white border border-black rounded-full text-base hover:opacity-80 transition-colors"
             >
               {isReflecting ? 'Reflecting…' : 'Reflect'}
             </button>
