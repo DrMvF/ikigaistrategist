@@ -1,7 +1,8 @@
-
 import { db } from "@/lib/db";
 import { reflections } from "@/drizzle/schema";
 import { desc } from "drizzle-orm";
+
+export const dynamic = 'force-dynamic'; // <- DAS HINZUFÜGEN!
 
 export default async function AdminPage() {
   const entries = await db.select().from(reflections).orderBy(desc(reflections.createdAt));
