@@ -23,10 +23,10 @@ export default function StartPage() {
         </p>
 
         <a
-          href="/check-in"
+          href="https://buy.stripe.com/aFacN5dFg7hMdxn1dJ7N603"
           className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
         >
-          Start now – 2,99 €/week
+          Start your 7-day free trial
         </a>
       </main>
     </div>
