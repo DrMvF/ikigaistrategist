@@ -1,4 +1,3 @@
-// app/start/page.tsx
 'use client';
 
 export default function StartPage() {
@@ -23,10 +22,10 @@ export default function StartPage() {
         </p>
 
         <a
-          href="https://buy.stripe.com/aFacN5dFg7hMdxn1dJ7N603"
+          href="/navigator"
           className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
         >
-          Start your 7-day free trial
+          Start your journey here
         </a>
       </main>
     </div>
