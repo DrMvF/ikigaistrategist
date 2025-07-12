@@ -6,14 +6,16 @@ import { cycleEntries } from "@/drizzle/schema";
 export async function POST(req: NextRequest) {
   console.log("📥 API hit: /api/cycle");
 
-  const { userId } = await auth();
-  console.log("👤 userId:", userId);
+  const { userId: authUserId } = await auth();
+  const { cycleDay, userId: clientUserId } = await req.json();
 
-  const { cycleDay } = await req.json();
+  const userId = authUserId || clientUserId;
+
+  console.log("👤 userId:", userId);
   console.log("📆 cycleDay:", cycleDay);
 
   if (!userId) {
-    console.warn("🚫 Unauthorized access attempt");
+    console.warn("🚫 No userId provided or found.");
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

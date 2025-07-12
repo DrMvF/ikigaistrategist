@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 import { track } from '@vercel/analytics';
 
 export default function OnboardingPage() {
   const [cycleDay, setCycleDay] = useState<number | ''>('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const { user } = useUser();
 
   const determinePhase = (day: number) => {
     if (day >= 1 && day <= 5) return 'menstruation';
@@ -25,7 +27,7 @@ export default function OnboardingPage() {
         const res = await fetch('/api/cycle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ cycleDay }),
+          body: JSON.stringify({ cycleDay, userId: user?.id }),
         });
 
         if (!res.ok) {
@@ -34,11 +36,7 @@ export default function OnboardingPage() {
           return;
         }
 
-        // ✅ Analytics Event
-        track('cycle_phase_saved', {
-          day: cycleDay,
-        });
-
+        track('cycle_phase_saved', { day: cycleDay });
       } catch (err) {
         console.error('❌ API error:', err);
         setError('Failed to save cycle info.');
@@ -63,8 +61,8 @@ export default function OnboardingPage() {
           Your purpose isn’t broken. <br /> Your rhythm is just ignored.
         </p>
         <p className="text-base sm:text-2xl mb-4">
-          Let’s begin by honoring your body.  <br />
-          Tell us where you are in your cycle –  <br />
+          Let’s begin by honoring your body. <br />
+          Tell us where you are in your cycle – <br />
           and we’ll align your prompts to your current phase.
         </p>
 
