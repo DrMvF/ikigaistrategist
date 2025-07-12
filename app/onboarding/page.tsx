@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { track } from '@vercel/analytics';
 
 export default function OnboardingPage() {
   const [cycleDay, setCycleDay] = useState<number | ''>('');
@@ -16,9 +17,34 @@ export default function OnboardingPage() {
     return 'unknown';
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
     if (typeof cycleDay === 'number' && cycleDay >= 1 && cycleDay <= 35) {
       const phase = determinePhase(cycleDay);
+
+      try {
+        const res = await fetch('/api/cycle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cycleDay }),
+        });
+
+        if (!res.ok) {
+          const data = await res.json();
+          setError(data.error || 'Something went wrong.');
+          return;
+        }
+
+        // ✅ Analytics Event
+        track('cycle_phase_saved', {
+          day: cycleDay,
+        });
+
+      } catch (err) {
+        console.error('❌ API error:', err);
+        setError('Failed to save cycle info.');
+        return;
+      }
+
       localStorage.setItem('cycle_day', cycleDay.toString());
       localStorage.setItem('cycle_phase', phase);
       router.push('/navigator');
@@ -58,7 +84,7 @@ export default function OnboardingPage() {
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
 
-        <div className="h-8" /> {/* Abstand zwischen Input und Button */}
+        <div className="h-8" />
 
         <button
           onClick={handleStart}
