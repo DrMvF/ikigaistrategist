@@ -33,7 +33,7 @@ export default function OnboardingPage() {
         <h1 className="text-3xl sm:text-4xl font-bold mb-4">
           Welcome, powerful woman.
         </h1>
-        <p className="text-lg sm:text-xl mb-6">
+        <p className="text-xl sm:text-2xl mb-6">
           Your purpose isn’t broken. Your rhythm is just ignored.
         </p>
         <p className="text-base sm:text-lg mb-4">
@@ -42,9 +42,10 @@ export default function OnboardingPage() {
           and we’ll align your prompts to your current phase.
         </p>
 
-        <label className="block text-lg mb-2 mt-8" htmlFor="cycleDay">
+        <label className="block text-xl sm:text-2xl mb-3 mt-10" htmlFor="cycleDay">
           On which day of your menstrual cycle are you today?
         </label>
+
         <input
           type="number"
           id="cycleDay"
@@ -52,14 +53,16 @@ export default function OnboardingPage() {
           max={35}
           value={cycleDay}
           onChange={(e) => setCycleDay(Number(e.target.value))}
-          className="w-24 text-center px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-black text-black dark:text-white"
+          className="w-24 text-center px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-black text-black dark:text-white text-lg"
         />
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
 
+        <div className="h-8" /> {/* Abstand zwischen Input und Button */}
+
         <button
           onClick={handleStart}
-          className="mt-8 bg-black text-white dark:bg-white dark:text-black px-6 py-3 rounded-full text-lg hover:bg-[#383838] dark:hover:bg-[#e5e5e5] transition-colors"
+          className="mt-4 bg-black text-white dark:bg-white dark:text-black px-6 py-3 rounded-full text-lg hover:bg-[#383838] dark:hover:bg-[#e5e5e5] transition-colors"
         >
           Let’s begin
         </button>
