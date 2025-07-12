@@ -34,11 +34,11 @@ export default function OnboardingPage() {
           Welcome, powerful woman.
         </h1>
         <p className="text-xl sm:text-2xl mb-6">
-          Your purpose isn’t broken. Your rhythm is just ignored.
+          Your purpose isn’t broken. <br /> Your rhythm is just ignored.
         </p>
-        <p className="text-base sm:text-lg mb-4">
-          Let’s begin by honoring your body.  
-          Tell us where you are in your cycle –  
+        <p className="text-base sm:text-2xl mb-4">
+          Let’s begin by honoring your body.  <br />
+          Tell us where you are in your cycle –  <br />
           and we’ll align your prompts to your current phase.
         </p>
 

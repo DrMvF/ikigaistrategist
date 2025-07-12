@@ -9,17 +9,17 @@ export default function StartPage() {
         </h1>
 
         <p className="text-xl sm:text-2xl max-w-xl">
-          A cycle-aware clarity system – built for women who feel deeply, think relentlessly, and want to trust their rhythm again.
+          A cycle-aware clarity system – built for women <br /> who feel deeply, think relentlessly, <br /> and want to trust their rhythm again.
         </p>
 
         <div className="h-12 sm:h-16" />
 
-        <p className="text-lg sm:text-xl">
-          Your purpose isn’t broken.  
+        <p className="text-lg sm:text-2xl">
+          Your purpose isn’t broken.  <br />
           Your rhythm is just ignored.
         </p>
-        <p className="text-lg sm:text-xl mb-12">
-          Begin your journey from where you are – hormonally, emotionally, meaningfully.
+        <p className="text-lg sm:text-2xl mb-12">
+          Begin your journey from where you are – <br /> hormonally, emotionally, meaningfully.
         </p>
 
         <a
