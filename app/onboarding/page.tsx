@@ -1,0 +1,69 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function OnboardingPage() {
+  const [cycleDay, setCycleDay] = useState<number | ''>('');
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const determinePhase = (day: number) => {
+    if (day >= 1 && day <= 5) return 'menstruation';
+    if (day >= 6 && day <= 13) return 'follicular';
+    if (day >= 14 && day <= 18) return 'ovulation';
+    if (day >= 19 && day <= 35) return 'luteal';
+    return 'unknown';
+  };
+
+  const handleStart = () => {
+    if (typeof cycleDay === 'number' && cycleDay >= 1 && cycleDay <= 35) {
+      const phase = determinePhase(cycleDay);
+      localStorage.setItem('cycle_day', cycleDay.toString());
+      localStorage.setItem('cycle_phase', phase);
+      router.push('/navigator');
+    } else {
+      setError('Please enter a valid day between 1 and 35.');
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-24 font-cm text-black dark:text-white bg-white dark:bg-black">
+      <main className="max-w-xl w-full text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4">
+          Welcome, powerful woman.
+        </h1>
+        <p className="text-lg sm:text-xl mb-6">
+          Your purpose isn’t broken. Your rhythm is just ignored.
+        </p>
+        <p className="text-base sm:text-lg mb-4">
+          Let’s begin by honoring your body.  
+          Tell us where you are in your cycle –  
+          and we’ll align your prompts to your current phase.
+        </p>
+
+        <label className="block text-lg mb-2 mt-8" htmlFor="cycleDay">
+          On which day of your menstrual cycle are you today?
+        </label>
+        <input
+          type="number"
+          id="cycleDay"
+          min={1}
+          max={35}
+          value={cycleDay}
+          onChange={(e) => setCycleDay(Number(e.target.value))}
+          className="w-24 text-center px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-black text-black dark:text-white"
+        />
+
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+
+        <button
+          onClick={handleStart}
+          className="mt-8 bg-black text-white dark:bg-white dark:text-black px-6 py-3 rounded-full text-lg hover:bg-[#383838] dark:hover:bg-[#e5e5e5] transition-colors"
+        >
+          Let’s begin
+        </button>
+      </main>
+    </div>
+  );
+}

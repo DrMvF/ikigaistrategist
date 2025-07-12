@@ -8,24 +8,25 @@ export default function StartPage() {
           Ikigai Strategist
         </h1>
 
-        <p className="text-xl sm:text-2xl">
-          A radically simple, deeply powerful habit tracker
+        <p className="text-xl sm:text-2xl max-w-xl">
+          A cycle-aware clarity system – built for women who feel deeply, think relentlessly, and want to trust their rhythm again.
         </p>
 
         <div className="h-12 sm:h-16" />
 
         <p className="text-lg sm:text-xl">
-          Speak your truth. Track your rhythm.
+          Your purpose isn’t broken.  
+          Your rhythm is just ignored.
         </p>
         <p className="text-lg sm:text-xl mb-12">
-          Align with what truly matters – and make it a way of life.
+          Begin your journey from where you are – hormonally, emotionally, meaningfully.
         </p>
 
         <a
-          href="/navigator"
+          href="/onboarding"
           className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
         >
-          Start your journey here
+          Begin with your cycle
         </a>
       </main>
     </div>
