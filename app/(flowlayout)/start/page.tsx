@@ -16,8 +16,9 @@ export default function StartPage() {
 
         <p className="text-lg sm:text-2xl">
           Your purpose isn’t broken.  <br />
-          Your rhythm is just ignored. <br />
+          Your rhythm is just ignored.
         </p>
+        <br />
         <p className="text-lg sm:text-2xl mb-12">
           Begin your journey from where you are – <br /> hormonally, emotionally, meaningfully.
         </p>
