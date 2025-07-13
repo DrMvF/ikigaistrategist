@@ -23,10 +23,10 @@ export default function StartPage() {
         </p>
 
         <a
-          href="/onboarding"
+          href="/invitation"
           className="cursor-pointer rounded-full bg-black text-white px-6 py-3 text-lg sm:text-xl text-center hover:bg-[#383838] transition-colors dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5]"
         >
-          Begin with your cycle
+          Learn how it works
         </a>
       </main>
     </div>

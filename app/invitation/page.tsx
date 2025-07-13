@@ -1,34 +1,35 @@
-"use client";
+'use client';
 
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 export default function InvitationPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-20 py-20 font-cm text-black dark:text-white bg-white dark:bg-black">
-      <main className="max-w-3xl w-full text-left space-y-6">
-        <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
+      <main className="max-w-3xl w-full text-left space-y-8 text-xl sm:text-2xl leading-relaxed">
+        <h1 className="text-3xl sm:text-4xl font-bold">
           Hormonally. Emotionally. Meaningfully.
         </h1>
 
-        <p className="text-xl">
+        <p>
           <strong>Ikigai Strategist for Women</strong> is a radically simple, deeply powerful habit tracker – designed for cyclical clarity. It’s built for you if you’ve ever felt overwhelmed by linear systems, uninspired by generic apps, or just... out of sync.
         </p>
 
-        <p className="text-lg">
+        <p>
           With our <strong>Triple 4 System</strong>, you align with your inner rhythm:
         </p>
 
-        <ul className="list-disc list-inside space-y-2">
-          <li>🌀 <strong>4 Ikigai Dimensions</strong>: Love, Skill, World, Finance</li>
-          <li>🌙 <strong>4 Cycle Phases</strong>: Menstruation, Follicular, Ovulation, Luteal</li>
-          <li>🪶 <strong>4 JERT Steps</strong>: Journal, Evaluate, Report, Trajectory</li>
+        <ul className="list-disc list-inside ml-4 space-y-2">
+          <li><strong>4 JERT Steps</strong>: Journal, Evaluate, Report, Trajectory</li>
+          <li><strong>4 Cycle Phases</strong>: Menstruation, Follicular, Ovulation, Luteal</li>
+          <li><strong>4 Ikigai Dimensions</strong>: Love, Skill, World, Finance</li>
         </ul>
 
-        <p className="text-lg">
+        <p>
           Here’s how it works – your full journey:
         </p>
 
-        <ol className="list-decimal list-inside space-y-4">
+        <ol className="list-decimal list-inside ml-4 space-y-4">
           <li>
             <strong>Start – Tell us where you are</strong><br />
             Enter your current day in your menstrual cycle. We’ll determine your hormonal phase so the rest of your experience flows with – not against – your body.
@@ -46,7 +47,6 @@ export default function InvitationPage() {
               <li><strong>World</strong> – Did you sense connection to a larger purpose or context?</li>
               <li><strong>Finance</strong> – Was there clarity or tension around money or material needs?</li>
             </ul>
-            You choose a number from 1–10 for each, like a soft self-inventory.
           </li>
           <li>
             <strong>Report – Meet your pattern</strong><br />
@@ -62,17 +62,20 @@ export default function InvitationPage() {
           </li>
         </ol>
 
-        <p className="text-lg italic text-gray-600 dark:text-gray-400">
+        <p className="italic text-gray-600 dark:text-gray-400">
           The world is becoming more masculine again – in politics, in systems, in pace. But you are not here to adapt. You are here to re-lead – from within.
         </p>
 
         <div className="pt-8">
-          <Link
-            href="/onboarding"
+          <button
+            onClick={() => {
+              track("invitation_start_clicked");
+              window.location.href = "/onboarding";
+            }}
             className="inline-block px-6 py-3 text-lg font-semibold text-white bg-black rounded-full hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition"
           >
             Start your cycle-aligned journey
-          </Link>
+          </button>
         </div>
       </main>
     </div>
