@@ -1,29 +1,41 @@
-// app/(protected)/admin/page.tsx
-
 import { db } from "@/lib/db";
 import { reflections } from "@/drizzle/schema";
 import { desc } from "drizzle-orm";
 
+interface ReflectionEntry {
+  id: string;
+  userId: string;
+  inputText: string;
+  reflectionText: string;
+  createdAt: Date | null;
+  loveScore: number | null;
+  skillScore: number | null;
+  worldScore: number | null;
+  financeScore: number | null;
+}
+
 interface GroupedReflections {
-  [userId: string]: typeof reflections.$inferSelect[];
+  [userId: string]: ReflectionEntry[];
 }
 
 function scoreColor(score: number | null) {
-  if (score == null) return "text-red-600";       // Rot, wenn keine Bewertung
-  if (score >= 7) return "text-green-700";        // Grün ab 7
-  if (score >= 4) return "text-yellow-600";       // Gelb ab 4
-  return "text-red-600";                           // Rot unter 4
+  if (score == null) return "text-red-600";
+  if (score >= 7) return "text-green-700";
+  if (score >= 4) return "text-yellow-600";
+  return "text-red-600";
 }
 
 function formatDateLocal(date: Date | string | null): string {
-  if (!date) return 'No timestamp';
-  return new Date(date).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
+  if (!date) return "No timestamp";
+  return new Date(date).toLocaleString("de-DE", { timeZone: "Europe/Berlin" });
 }
 
 export default async function AdminPage() {
-  const entries = await db.select().from(reflections).orderBy(desc(reflections.createdAt));
+  const entries: ReflectionEntry[] = await db
+    .select()
+    .from(reflections)
+    .orderBy(desc(reflections.createdAt));
 
-  // Reflections gruppieren nach userId
   const grouped: GroupedReflections = {};
   for (const entry of entries) {
     if (!grouped[entry.userId]) {
@@ -49,19 +61,25 @@ export default async function AdminPage() {
                 <ul className="space-y-4 mt-4">
                   {reflections.map((entry) => (
                     <li key={entry.id} className="border p-4 rounded text-sm">
-                      <p className="text-gray-500">
-                        {formatDateLocal(entry.createdAt)}
-                      </p>
+                      <p className="text-gray-500">{formatDateLocal(entry.createdAt)}</p>
                       <p className="mt-2 whitespace-pre-wrap">
                         <strong>Input:</strong> {entry.inputText}
                         <br />
                         <strong>Reflection:</strong> {entry.reflectionText}
                       </p>
                       <p className="mt-2 text-sm space-x-2">
-                        <span className={scoreColor(entry.loveScore)}><strong>Love:</strong> {entry.loveScore ?? '–'}</span>
-                        <span className={scoreColor(entry.skillScore)}><strong>Skill:</strong> {entry.skillScore ?? '–'}</span>
-                        <span className={scoreColor(entry.worldScore)}><strong>World:</strong> {entry.worldScore ?? '–'}</span>
-                        <span className={scoreColor(entry.financeScore)}><strong>Finance:</strong> {entry.financeScore ?? '–'}</span>
+                        <span className={scoreColor(entry.loveScore)}>
+                          <strong>Love:</strong> {entry.loveScore ?? "–"}
+                        </span>
+                        <span className={scoreColor(entry.skillScore)}>
+                          <strong>Skill:</strong> {entry.skillScore ?? "–"}
+                        </span>
+                        <span className={scoreColor(entry.worldScore)}>
+                          <strong>World:</strong> {entry.worldScore ?? "–"}
+                        </span>
+                        <span className={scoreColor(entry.financeScore)}>
+                          <strong>Finance:</strong> {entry.financeScore ?? "–"}
+                        </span>
                       </p>
                     </li>
                   ))}
