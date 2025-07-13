@@ -14,14 +14,15 @@ export default function StartPage() {
 
         <div className="h-12 sm:h-16" />
 
-        <p className="text-lg sm:text-2xl">
+        <p className="text-lg sm:text-xl">
           Your purpose isn’t broken.  <br />
           Your rhythm is just ignored.
         </p>
-        <br />
-        <p className="text-lg sm:text-2xl mb-12">
+
+        <p className="text-lg sm:text-xl mb-12 mt-4">
           Begin your journey from where you are – <br /> hormonally, emotionally, meaningfully.
         </p>
+
 
         <a
           href="/invitation"
