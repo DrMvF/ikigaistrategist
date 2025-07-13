@@ -1,10 +1,12 @@
+// app/sign-in/page.tsx
+
 'use client';
 
-export const dynamic = "force-dynamic";
-
+import { useEffect, useState } from "react";
 import { SignIn } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+
+export const dynamic = "force-dynamic";
 
 export default function SignInPage() {
   const searchParams = useSearchParams();
@@ -12,7 +14,9 @@ export default function SignInPage() {
 
   useEffect(() => {
     const url = searchParams.get("redirect_url");
-    if (url) setRedirectUrl(url);
+    if (url) {
+      setRedirectUrl(url);
+    }
   }, [searchParams]);
 
   return (

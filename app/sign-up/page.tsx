@@ -1,10 +1,12 @@
+// app/sign-up/page.tsx
+
 'use client';
 
-export const dynamic = "force-dynamic";
-
-import { SignUp } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
+import { SignUp } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export default function SignUpPage() {
   const searchParams = useSearchParams();
