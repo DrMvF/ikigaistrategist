@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { track } from "@vercel/analytics";
+import { useAuth, useUser, SignInButton, SignOutButton } from "@clerk/nextjs";
 
 const navItems = [
   { name: "Start", href: "/start", protected: false },
@@ -20,6 +21,8 @@ const navItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { isSignedIn } = useAuth();
+  const { user } = useUser();
 
   const handleTrack = (label: string) => {
     track("sidebar_click", { label });
@@ -55,32 +58,37 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </nav>
           </div>
 
-          {/* Footer Links */}
-          <div className="mt-10">
-            <hr className="my-4 border-gray-300 dark:border-gray-700" />
-            <div className="space-y-2 text-sm text-gray-500">
-              <Link
-                href="/legal"
-                onClick={() => handleTrack("Legal Notice")}
-                className="block hover:underline"
-              >
+          {/* Footer Links + Auth */}
+          <div className="mt-10 space-y-4 text-sm text-gray-500">
+            <hr className="border-gray-300 dark:border-gray-700" />
+            <div className="space-y-2">
+              <Link href="/legal" onClick={() => handleTrack("Legal Notice")} className="block hover:underline">
                 Legal Notice
               </Link>
-              <Link
-                href="/privacy"
-                onClick={() => handleTrack("Privacy Policy")}
-                className="block hover:underline"
-              >
+              <Link href="/privacy" onClick={() => handleTrack("Privacy Policy")} className="block hover:underline">
                 Privacy Policy
               </Link>
-              <Link
-                href="/terms"
-                onClick={() => handleTrack("Terms & Conditions")}
-                className="block hover:underline"
-              >
+              <Link href="/terms" onClick={() => handleTrack("Terms & Conditions")} className="block hover:underline">
                 Terms & Conditions
               </Link>
             </div>
+
+            <hr className="my-4 border-gray-300 dark:border-gray-700" />
+
+            {isSignedIn ? (
+              <div>
+                <p className="text-xs text-gray-400 mb-1">
+                  Signed in as {user?.emailAddresses[0]?.emailAddress}
+                </p>
+                <SignOutButton>
+                  <button className="hover:underline">Sign out</button>
+                </SignOutButton>
+              </div>
+            ) : (
+              <SignInButton mode="modal">
+                <button className="hover:underline">Sign in</button>
+              </SignInButton>
+            )}
           </div>
         </div>
       </aside>
