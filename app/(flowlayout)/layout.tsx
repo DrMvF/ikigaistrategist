@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
 
   const handleTrack = (label: string) => {
-    track("sidebar_click", { label });
+    track("sidebar_click", { label, from: pathname });
   };
 
   return (
@@ -62,13 +62,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="mt-10 space-y-4 text-sm text-gray-500">
             <hr className="border-gray-300 dark:border-gray-700" />
             <div className="space-y-2">
-              <Link href="/legal" onClick={() => handleTrack("Legal Notice")} className="block hover:underline">
+              <Link
+                href="/legal"
+                onClick={() => handleTrack("Legal Notice")}
+                className="block hover:underline"
+              >
                 Legal Notice
               </Link>
-              <Link href="/privacy" onClick={() => handleTrack("Privacy Policy")} className="block hover:underline">
+              <Link
+                href="/privacy"
+                onClick={() => handleTrack("Privacy Policy")}
+                className="block hover:underline"
+              >
                 Privacy Policy
               </Link>
-              <Link href="/terms" onClick={() => handleTrack("Terms & Conditions")} className="block hover:underline">
+              <Link
+                href="/terms"
+                onClick={() => handleTrack("Terms & Conditions")}
+                className="block hover:underline"
+              >
                 Terms & Conditions
               </Link>
             </div>
@@ -80,13 +92,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <p className="text-xs text-gray-400 mb-1">
                   Signed in as {user?.emailAddresses[0]?.emailAddress}
                 </p>
-                <SignOutButton>
-                  <button className="hover:underline">Sign out</button>
+                <SignOutButton redirectUrl="/start">
+                  <button
+                    className="hover:underline"
+                    onClick={() => track("sign_out_click", { from: pathname })}
+                  >
+                    Sign out
+                  </button>
                 </SignOutButton>
               </div>
             ) : (
               <SignInButton mode="modal">
-                <button className="hover:underline">Sign in</button>
+                <button
+                  className="hover:underline"
+                  onClick={() => track("sign_in_click", { from: pathname })}
+                >
+                  Sign in
+                </button>
               </SignInButton>
             )}
           </div>
