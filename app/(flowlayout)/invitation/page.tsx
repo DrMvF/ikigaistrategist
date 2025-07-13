@@ -6,7 +6,7 @@ import { track } from "@vercel/analytics";
 export default function InvitationPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-20 py-20 font-cm text-black dark:text-white bg-white dark:bg-black">
-      <main className="max-w-3xl w-full text-left space-y-8 text-xl sm:text-2xl leading-relaxed">
+      <main className="max-w-3xl w-full text-left space-y-8 text-xl sm:text-xl leading-relaxed">
         <h1 className="text-3xl sm:text-4xl font-bold">
           Hormonally. Emotionally. Meaningfully.
         </h1>

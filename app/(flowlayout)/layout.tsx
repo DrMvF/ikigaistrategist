@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { track } from "@vercel/analytics";
 
 const navItems = [
   { name: "Start", href: "/start", protected: false },
@@ -20,16 +21,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  const handleTrack = (label: string) => {
+    track("sidebar_click", { label });
+  };
+
   return (
     <div className="flex min-h-screen font-cm">
       {/* Sidebar */}
       <aside
         className={`
-        fixed z-40 top-0 left-0 h-full w-64 bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800
-        transform ${open ? "translate-x-0" : "-translate-x-full"}
-        transition-transform duration-200 ease-in-out
-        md:translate-x-0 md:static md:block
-      `}
+          fixed z-40 top-0 left-0 h-full w-64 bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800
+          transform ${open ? "translate-x-0" : "-translate-x-full"}
+          transition-transform duration-200 ease-in-out
+          md:translate-x-0 md:static md:block
+        `}
       >
         <div className="p-6 flex flex-col justify-between h-full">
           <div>
@@ -39,6 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.name}
                   href={item.href}
+                  onClick={() => handleTrack(item.name)}
                   className={`block px-2 py-1 rounded hover:underline ${
                     pathname === item.href ? "font-semibold underline" : ""
                   }`}
@@ -53,13 +59,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="mt-10">
             <hr className="my-4 border-gray-300 dark:border-gray-700" />
             <div className="space-y-2 text-sm text-gray-500">
-              <Link href="/legal" className="block hover:underline">
+              <Link
+                href="/legal"
+                onClick={() => handleTrack("Legal Notice")}
+                className="block hover:underline"
+              >
                 Legal Notice
               </Link>
-              <Link href="/privacy" className="block hover:underline">
+              <Link
+                href="/privacy"
+                onClick={() => handleTrack("Privacy Policy")}
+                className="block hover:underline"
+              >
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="block hover:underline">
+              <Link
+                href="/terms"
+                onClick={() => handleTrack("Terms & Conditions")}
+                className="block hover:underline"
+              >
                 Terms & Conditions
               </Link>
             </div>
