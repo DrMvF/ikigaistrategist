@@ -45,7 +45,7 @@ export default function OnboardingPage() {
 
       localStorage.setItem('cycle_day', cycleDay.toString());
       localStorage.setItem('cycle_phase', phase);
-      router.push('/navigator');
+      router.push('/journal');
     } else {
       setError('Please enter a valid day between 1 and 35.');
     }
