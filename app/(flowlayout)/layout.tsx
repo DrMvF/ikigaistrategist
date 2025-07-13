@@ -1,0 +1,64 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navItems = [
+  { name: "Start", href: "/start", protected: false },
+  { name: "Invitation", href: "/invitation", protected: false },
+  { name: "Onboarding", href: "/onboarding", protected: true },
+  { name: "Journal", href: "/journal", protected: true },
+  { name: "Evaluate", href: "/evaluate", protected: true },
+  { name: "Report", href: "/report", protected: true },
+  { name: "Trajectory", href: "/trajectory", protected: true },
+  { name: "TripleFour", href: "/triplefour", protected: true },
+  { name: "Flow Overview", href: "/flow", protected: false },
+];
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  return (
+    <div className="flex min-h-screen font-cm">
+      {/* Sidebar */}
+      <aside className={`
+        fixed z-40 top-0 left-0 h-full w-64 bg-white dark:bg-black border-r border-gray-200 dark:border-gray-800
+        transform ${open ? "translate-x-0" : "-translate-x-full"}
+        transition-transform duration-200 ease-in-out
+        md:translate-x-0 md:static md:block
+      `}>
+        <div className="p-6 space-y-4">
+          <h2 className="text-xl font-bold">Navigation</h2>
+          <nav className="space-y-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`block px-2 py-1 rounded hover:underline ${
+                  pathname === item.href ? "font-semibold underline" : ""
+                }`}
+              >
+                {item.name} {item.protected && <span className="text-gray-400">🔒</span>}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </aside>
+
+      {/* Mobile Toggle */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 px-3 py-1 rounded"
+        onClick={() => setOpen(!open)}
+      >
+        ☰
+      </button>
+
+      {/* Main Content */}
+      <main className="flex-1 ml-0 md:ml-64 px-6 sm:px-12 py-10 bg-white dark:bg-black text-black dark:text-white">
+        {children}
+      </main>
+    </div>
+  );
+}

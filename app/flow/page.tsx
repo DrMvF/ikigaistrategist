@@ -13,8 +13,8 @@ const stages = [
 const navigatorStages = [
   { name: "Journal", path: "/journal", status: "✅", note: "Whisper input + reflection + DB" },
   { name: "Evaluate", path: "/evaluate", status: "✅", note: "Ikigai ratings + DB" },
-  { name: "Report", path: "/report", status: "✅", note: "Radar chart (cycle phase missing)" },
-  { name: "Trajectory", path: "/trajectory", status: "✅", note: "Ikigai trends over time" },
+  { name: "Report", path: "/report", status: "✅", note: "Radar chart (cycle phase: to be added)" },
+  { name: "Trajectory", path: "/trajectory", status: "✅", note: "Ikigai trends over time (cycle phase: to be added)" },
   { name: "TripleFour", path: "/triplefour", status: "⏳", note: "Empowerment report – not built yet" },
 ];
 
