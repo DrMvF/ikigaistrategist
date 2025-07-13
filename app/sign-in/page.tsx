@@ -1,32 +1,33 @@
-// app/sign-in/page.tsx
-
 'use client';
-
-import { useEffect, useState } from "react";
-import { SignIn } from "@clerk/nextjs";
-import { useSearchParams } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export default function SignInPage() {
-  const searchParams = useSearchParams();
-  const [redirectUrl, setRedirectUrl] = useState("/start");
+import { SignIn } from "@clerk/nextjs";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-  useEffect(() => {
-    const url = searchParams.get("redirect_url");
-    if (url) {
-      setRedirectUrl(url);
-    }
-  }, [searchParams]);
+// 👇 SignIn Wrapper
+function SignInWrapper() {
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect_url") || "/start";
 
   return (
+    <SignIn
+      path="/sign-in"
+      routing="path"
+      signUpUrl="/sign-up"
+      redirectUrl={redirectUrl}
+    />
+  );
+}
+
+// 👇 Haupt-Komponente mit Suspense
+export default function SignInPage() {
+  return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black">
-      <SignIn
-        path="/sign-in"
-        routing="path"
-        signUpUrl="/sign-up"
-        redirectUrl={redirectUrl}
-      />
+      <Suspense fallback={<div>Loading sign-in...</div>}>
+        <SignInWrapper />
+      </Suspense>
     </div>
   );
 }
