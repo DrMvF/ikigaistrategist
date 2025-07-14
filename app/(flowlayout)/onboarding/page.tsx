@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@clerk/nextjs';
+import { useUser, useClerk } from '@clerk/nextjs';
 import { track } from '@vercel/analytics';
 
 export default function OnboardingPage() {
@@ -10,6 +10,7 @@ export default function OnboardingPage() {
   const [error, setError] = useState('');
   const router = useRouter();
   const { user } = useUser();
+  const { openSignIn } = useClerk();
 
   const determinePhase = (day: number) => {
     if (day >= 1 && day <= 5) return 'menstruation';
@@ -20,6 +21,11 @@ export default function OnboardingPage() {
   };
 
   const handleStart = async () => {
+    if (!user) {
+      openSignIn(); // Öffnet Clerk-SignIn Modal, wenn nicht eingeloggt
+      return;
+    }
+
     if (typeof cycleDay === 'number' && cycleDay >= 1 && cycleDay <= 35) {
       const phase = determinePhase(cycleDay);
 
@@ -27,7 +33,7 @@ export default function OnboardingPage() {
         const res = await fetch('/api/cycle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ cycleDay, userId: user?.id }),
+          body: JSON.stringify({ cycleDay, userId: user.id }),
         });
 
         if (!res.ok) {
