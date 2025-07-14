@@ -19,29 +19,22 @@ export async function GET(req: NextRequest) {
   const benchmarkWeek = Number(searchParams.get("benchmark"));
 
   if (!currentWeek || !benchmarkWeek) {
-    return NextResponse.json(
-      { error: "Missing ?current= or ?benchmark=" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Missing ?current= or ?benchmark=" }, { status: 400 });
   }
 
-  // Default time zone to Europe/Berlin
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Berlin";
+  const entries = await db.select().from(reflections).where(eq(reflections.userId, userId));
 
-  // Fetch all reflections for this user
-  const all = await db.select().from(reflections).where(eq(reflections.userId, userId));
-
-  // Group reflections by ISO calendar week based on local time
-  const grouped: Record<number, typeof all> = {};
-  for (const entry of all) {
+  // Gruppieren nach ISO-Kalenderwoche basierend auf Europe/Berlin
+  const grouped: Record<number, typeof entries> = {};
+  for (const entry of entries) {
     if (!entry.createdAt) continue;
-    const localDate = toZonedTime(entry.createdAt, timeZone);
-    const week = getISOWeek(localDate);
+    const local = toZonedTime(entry.createdAt, "Europe/Berlin");
+    const week = getISOWeek(local);
     if (!grouped[week]) grouped[week] = [];
     grouped[week].push(entry);
   }
 
-  function averageScore(entries: typeof all) {
+  function averageScore(entries: typeof reflections.$inferSelect[]) {
     const count = entries.length || 1;
     const sum = (key: keyof typeof entries[0]) =>
       entries.reduce((acc, e) => {
