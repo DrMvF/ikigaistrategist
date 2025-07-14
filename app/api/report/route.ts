@@ -27,8 +27,8 @@ export async function GET(req: NextRequest) {
   // Group reflections by ISO calendar week
   const grouped: Record<number, typeof all> = {};
   for (const entry of all) {
-    if (!entry.created_at) continue; // ⬅️ angepasst!
-    const week = getISOWeek(new Date(entry.created_at)); // ⬅️ angepasst!
+    if (!entry.createdAt) continue;
+    const week = getISOWeek(new Date(entry.createdAt));
     if (!grouped[week]) grouped[week] = [];
     grouped[week].push(entry);
   }
@@ -42,10 +42,10 @@ export async function GET(req: NextRequest) {
       }, 0);
 
     return {
-      love: Number((sum("love_score") / count).toFixed(2)),
-      skill: Number((sum("skill_score") / count).toFixed(2)),
-      finance: Number((sum("finance_score") / count).toFixed(2)),
-      world: Number((sum("world_score") / count).toFixed(2)),
+      love: Number((sum("loveScore") / count).toFixed(2)),
+      skill: Number((sum("skillScore") / count).toFixed(2)),
+      finance: Number((sum("financeScore") / count).toFixed(2)),
+      world: Number((sum("worldScore") / count).toFixed(2)),
     };
   }
 
