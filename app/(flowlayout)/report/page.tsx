@@ -30,7 +30,7 @@ export default function ReportPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(/api/report?current=${currentWeek}&benchmark=${benchmarkWeek})
+      const res = await fetch(`/api/report?current=${currentWeek}&benchmark=${benchmarkWeek}`);
       const json = await res.json()
       setData(json)
 
