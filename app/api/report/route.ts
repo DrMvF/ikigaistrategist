@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { reflections } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 import { getISOWeek } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 export async function GET(req: NextRequest) {
   const { userId } = await auth();
@@ -18,17 +19,24 @@ export async function GET(req: NextRequest) {
   const benchmarkWeek = Number(searchParams.get("benchmark"));
 
   if (!currentWeek || !benchmarkWeek) {
-    return NextResponse.json({ error: "Missing ?current= or ?benchmark=" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing ?current= or ?benchmark=" },
+      { status: 400 }
+    );
   }
+
+  // Default time zone to Europe/Berlin
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Berlin";
 
   // Fetch all reflections for this user
   const all = await db.select().from(reflections).where(eq(reflections.userId, userId));
 
-  // Group reflections by ISO calendar week
+  // Group reflections by ISO calendar week based on local time
   const grouped: Record<number, typeof all> = {};
   for (const entry of all) {
     if (!entry.createdAt) continue;
-    const week = getISOWeek(new Date(entry.createdAt));
+    const localDate = toZonedTime(entry.createdAt, timeZone);
+    const week = getISOWeek(localDate);
     if (!grouped[week]) grouped[week] = [];
     grouped[week].push(entry);
   }
