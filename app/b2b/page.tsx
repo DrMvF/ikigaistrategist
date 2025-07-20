@@ -24,9 +24,9 @@ export default function B2BPage() {
         </p>
 
         <div className="bg-gray-100 dark:bg-zinc-900 p-6 rounded-xl text-left text-lg mb-12">
-          <h2 className="text-xl font-semibold mb-2">🌀 Stabilization Track – 4 Weeks (Remote)</h2>
+          <h2 className="text-xl font-semibold mb-2">Stabilization Track – 4 Weeks (Remote)</h2>
           <ul className="list-disc pl-5 space-y-1 text-left">
-            <li>Kick-off workshop + 2 follow-up sessions (90 min)</li>
+            <li>Kick-off workshop (3 hours) + 2 follow-up sessions (90 min)</li>
             <li>Secure journaling platform for daily insights</li>
             <li>Team-wide pattern recognition & synthesis</li>
             <li>Final recommendations for team relief</li>
@@ -41,10 +41,6 @@ export default function B2BPage() {
           <br />
           Want to explore how this could serve your team?
         </p>
-
-        <h2 className="text-xl sm:text-2xl font-semibold mt-20 mb-6">
-          Join the B2B Waitlist
-        </h2>
 
         <form
           action="https://radicalsensitiveleadership.mailcoach.app/subscribe/824a107f-1c54-4dc4-b33a-301731273135"
