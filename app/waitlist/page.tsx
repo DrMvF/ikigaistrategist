@@ -10,16 +10,25 @@ export default function WaitlistPage() {
           Ikigai Strategist
         </h1>
 
-        <p className="text-xl sm:text-2xl">
-          A radically simple, deeply powerful habit tracker
+        <p className="text-xl sm:text-2xl font-light mb-4">
+          A clarity system for high-performing professionals and resilient teams
         </p>
 
-        <div className="h-12 sm:h-16" />
+        <div className="h-4 sm:h-6" />
 
-        <p className="text-lg sm:text-xl">
-          Built in public. Designed for alignment.
+        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">
+          You don’t need more hustle.
         </p>
-        <p className="text-lg sm:text-xl mb-12">
+        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">
+          You need a rhythm that aligns.
+        </p>
+
+        <div className="h-6 sm:h-8" />
+
+        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">
+          Built in public. Powered by voice. Grounded in purpose.
+        </p>
+        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-12">
           Thank you for being early.
         </p>
 
