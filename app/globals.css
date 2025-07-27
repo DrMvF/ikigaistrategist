@@ -150,3 +150,14 @@ body {
   }
 }
 
+/* Print styles: ensure colors are preserved on print/PDF */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari */
+    color-adjust: exact !important; /* Firefox */
+  }
+  .heatmap div {
+    -webkit-print-color-adjust: exact !important;
+    background-color: inherit !important;
+  }
+}
