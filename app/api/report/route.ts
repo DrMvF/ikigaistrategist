@@ -43,17 +43,17 @@ export async function GET(req: NextRequest) {
       }, 0);
 
     return {
-      love: Number((sum("loveScore") / count).toFixed(2)),
-      skill: Number((sum("skillScore") / count).toFixed(2)),
-      finance: Number((sum("financeScore") / count).toFixed(2)),
-      world: Number((sum("worldScore") / count).toFixed(2)),
+      goals: Number((sum("goalsScore") / count).toFixed(2)),
+      energy: Number((sum("energyScore") / count).toFixed(2)),
+      communication: Number((sum("communicationScore") / count).toFixed(2)),
+      trust: Number((sum("trustScore") / count).toFixed(2)),
     };
   }
 
   const currentAvg = averageScore(grouped[currentWeek] || []);
   const benchmarkAvg = averageScore(grouped[benchmarkWeek] || []);
 
-  const response = ["love", "skill", "finance", "world"].map((dimension) => ({
+  const response = ["goals", "energy", "communication", "trust"].map((dimension) => ({
     dimension: dimension.charAt(0).toUpperCase() + dimension.slice(1),
     current: currentAvg[dimension as keyof typeof currentAvg],
     benchmark: benchmarkAvg[dimension as keyof typeof benchmarkAvg],

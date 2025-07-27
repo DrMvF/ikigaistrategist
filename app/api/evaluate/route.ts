@@ -14,8 +14,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing data" }, { status: 400 });
   }
 
-  // Nur erlaubte Felder zulassen
-  const allowedFields = ["loveScore", "skillScore", "worldScore", "financeScore"] as const;
+  // Neue erlaubte Felder
+  const allowedFields = [
+    "goalsScore",
+    "energyScore",
+    "communicationScore",
+    "trustScore",
+  ] as const;
 
   if (!allowedFields.includes(field)) {
     return NextResponse.json({ error: "Invalid field" }, { status: 400 });

@@ -1,8 +1,6 @@
-// drizzle/schema.ts
-
 import { mysqlTable, varchar, text, timestamp, int, serial } from "drizzle-orm/mysql-core";
 
-// Bestehende Tabelle
+// Aktualisierte Tabelle: reflections
 export const reflections = mysqlTable("reflections", {
   id: varchar("id", { length: 255 }).primaryKey(),
   userId: varchar("user_id", { length: 255 }).notNull(),
@@ -10,13 +8,14 @@ export const reflections = mysqlTable("reflections", {
   reflectionText: text("reflection_text").notNull(),
   environment: varchar("environment", { length: 20 }).default("dev"),
   createdAt: timestamp("created_at").defaultNow(),
-  loveScore: int("love_score"),
-  skillScore: int("skill_score"),
-  worldScore: int("world_score"),
-  financeScore: int("finance_score"),
+  goalsScore: int("goals_score"),
+  energyScore: int("energy_score"),
+  communicationScore: int("communication_score"),
+  trustScore: int("trust_score"),
+  teamId: varchar("team_id", { length: 64 }), // optional
 });
 
-// ✨ Neue Tabelle: cycle_entries
+// Tabelle: cycle_entries
 export const cycleEntries = mysqlTable("cycle_entries", {
   id: serial("id").primaryKey(),
   userId: varchar("user_id", { length: 255 }).notNull(),
@@ -28,5 +27,5 @@ export const cycleEntries = mysqlTable("cycle_entries", {
 // Schema exportieren
 export const schema = {
   reflections,
-  cycleEntries
+  cycleEntries,
 };

@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   const grouped: { [date: string]: typeof entries } = {};
 
   for (const entry of entries) {
-    if (!entry.createdAt) continue; // sicherstellen, dass createdAt nicht null ist
+    if (!entry.createdAt) continue;
     const local = toZonedTime(entry.createdAt, tz);
     const date = format(local, "yyyy-MM-dd", { timeZone: tz });
     if (!grouped[date]) grouped[date] = [];
@@ -29,14 +29,13 @@ export async function GET(req: Request) {
   }
 
   const result = Object.entries(grouped).map(([date, group]) => {
-    const love = average(group.map((e) => e.loveScore));
-    const skill = average(group.map((e) => e.skillScore));
-    const world = average(group.map((e) => e.worldScore));
-    const finance = average(group.map((e) => e.financeScore));
-    return { date, love, skill, world, finance };
+    const goals = average(group.map((e) => e.goalsScore));
+    const energy = average(group.map((e) => e.energyScore));
+    const communication = average(group.map((e) => e.communicationScore));
+    const trust = average(group.map((e) => e.trustScore));
+    return { date, goals, energy, communication, trust };
   });
 
-  // ⬇️ NEU: Sortiere Ergebnis chronologisch aufsteigend (von links nach rechts im Chart)
   result.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return NextResponse.json(result);
