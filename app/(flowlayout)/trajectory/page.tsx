@@ -16,10 +16,10 @@ import { track } from '@vercel/analytics';
 
 interface TrajectoryPoint {
   date: string;
-  love: number;
-  skill: number;
-  world: number;
-  finance: number;
+  goals: number;
+  trust: number;
+  energy: number;
+  communication: number;
 }
 
 export default function TrajectoryPage() {
@@ -28,6 +28,8 @@ export default function TrajectoryPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      track('view_trajectory_page');
+
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const res = await fetch(`/api/trajectory?tz=${encodeURIComponent(tz)}`);
       const json = await res.json();
@@ -47,9 +49,9 @@ export default function TrajectoryPage() {
   return (
     <div className="min-h-screen px-6 py-16 space-y-8 text-center font-cm print:bg-white print:text-black">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Your Ikigai Trajectory</h1>
+        <h1 className="text-4xl font-bold mb-2">Your Personal Ikigai Resilience Trajectory</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          This line chart shows the evolution of your Ikigai dimensions over time.
+          This line chart shows the evolution of your resilience pattern across the four Ikigai dimensions over time.
         </p>
       </div>
 
@@ -64,7 +66,7 @@ export default function TrajectoryPage() {
                   <YAxis
                     domain={[0, 10]}
                     label={{
-                      value: 'Ikigai Score (1–10)',
+                      value: 'Score (1–10)',
                       angle: -90,
                       position: 'insideLeft',
                       style: {
@@ -91,101 +93,69 @@ export default function TrajectoryPage() {
                   />
                   <Line
                     type="monotone"
-                    dataKey="love"
+                    dataKey="goals"
                     stroke="#404040"
                     strokeWidth={1.5}
                     strokeDasharray="0"
                     dot={{ r: 2 }}
-                    name="Love"
+                    name="Goals"
                   />
                   <Line
                     type="monotone"
-                    dataKey="world"
+                    dataKey="trust"
                     stroke="#404040"
                     strokeWidth={1.5}
                     strokeDasharray="5 5"
                     dot={{ r: 2 }}
-                    name="World"
+                    name="Trust"
                   />
                   <Line
                     type="monotone"
-                    dataKey="skill"
+                    dataKey="energy"
                     stroke="#404040"
                     strokeWidth={1.5}
                     strokeDasharray="2 4"
                     dot={{ r: 2 }}
-                    name="Skill"
+                    name="Energy"
                   />
                   <Line
                     type="monotone"
-                    dataKey="finance"
+                    dataKey="communication"
                     stroke="#404040"
                     strokeWidth={1.5}
                     strokeDasharray="10 4 2 4"
                     dot={{ r: 2 }}
-                    name="Finance"
+                    name="Communication"
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
 
-            {/* Verbesserte Legende mit echten Linienstilen */}
+            {/* Legende mit passenden Linienstilen */}
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm text-gray-700 dark:text-gray-300 font-cm">
               <div className="flex items-center gap-2">
-                <svg width="40" height="6" className="text-gray-600">
-                  <line
-                    x1="0"
-                    y1="3"
-                    x2="40"
-                    y2="3"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeDasharray="0"
-                  />
+                <svg width="40" height="6">
+                  <line x1="0" y1="3" x2="40" y2="3" stroke="currentColor" strokeWidth="1.5" />
                 </svg>
-                Love (solid)
+                Goals
               </div>
               <div className="flex items-center gap-2">
-                <svg width="40" height="6" className="text-gray-600">
-                  <line
-                    x1="0"
-                    y1="3"
-                    x2="40"
-                    y2="3"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeDasharray="5 5"
-                  />
+                <svg width="40" height="6">
+                  <line x1="0" y1="3" x2="40" y2="3" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 5" />
                 </svg>
-                World (dashed)
+                Trust
               </div>
               <div className="flex items-center gap-2">
-                <svg width="40" height="6" className="text-gray-600">
-                  <line
-                    x1="0"
-                    y1="3"
-                    x2="40"
-                    y2="3"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeDasharray="2 4"
-                  />
+                <svg width="40" height="6">
+                  <line x1="0" y1="3" x2="40" y2="3" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 4" />
                 </svg>
-                Skill (dotted)
+                Energy
               </div>
               <div className="flex items-center gap-2">
-                <svg width="40" height="6" className="text-gray-600">
-                  <line
-                    x1="0"
-                    y1="3"
-                    x2="40"
-                    y2="3"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeDasharray="10 4 2 4"
-                  />
+                <svg width="40" height="6">
+                  <line x1="0" y1="3" x2="40" y2="3" stroke="currentColor" strokeWidth="1.5" strokeDasharray="10 4 2 4" />
                 </svg>
-                Finance (rhythm)
+                Communication
               </div>
             </div>
           </CardContent>

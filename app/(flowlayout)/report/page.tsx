@@ -51,7 +51,9 @@ export default function ReportPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 space-y-10 text-center print:bg-white print:text-black">
       <div>
-        <h1 className="text-4xl font-bold mb-4">Your Ikigai Pattern</h1>
+        <h1 className="text-4xl font-bold mb-4 font-cm">
+          Your Personal Ikigai Resilience Pattern
+        </h1>
         <p className="text-muted-foreground max-w-xl mx-auto">
           This radar chart shows your current balance across the four dimensions of Ikigai.
           Select the time periods you want to compare below.
@@ -119,18 +121,18 @@ export default function ReportPage() {
                     }}
                   />
                   <Radar
-                  name="Benchmark"
-                  dataKey="benchmark"
-                  stroke="#A0A0A0"
-                  fill="rgba(160,160,160,0.3)"
-                  fillOpacity={1}
+                    name="Benchmark"
+                    dataKey="benchmark"
+                    stroke="#A0A0A0"
+                    fill="rgba(160,160,160,0.3)"
+                    fillOpacity={1}
                   />
                   <Radar
-                  name="Current"
-                  dataKey="current"
-                  stroke="#404040"
-                  fill="rgba(64,64,64,0.2)"
-                  fillOpacity={1}
+                    name="Current"
+                    dataKey="current"
+                    stroke="#404040"
+                    fill="rgba(64,64,64,0.2)"
+                    fillOpacity={1}
                   />
                   <Legend verticalAlign="bottom" align="right" layout="vertical" />
                 </RadarChart>
