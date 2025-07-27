@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import Heatmap from '@/components/analytics/Heatmap';
 import RadarChart from '@/components/analytics/RadarChart';
 import TextHighlights from '@/components/analytics/TextHighlights';
+import { Button } from '@/components/ui/button';
 
 interface HeatmapDataPoint {
   date: string;
@@ -33,7 +34,7 @@ function transformHeatmap(raw: number[][], month: string): HeatmapDataPoint[] {
         const date = new Date(year, monthIndex, day);
         result.push({
           date: date.toISOString().split('T')[0],
-          value,
+          value: value / 10, // ✅ zurückskalieren auf 0–10
         });
       }
     });
@@ -47,19 +48,17 @@ export default function TripleFourReportPage() {
   const [soloData, setSoloData] = useState<{ heatmap: number[][]; radar: any[]; reflections: string[] } | null>(null);
   const [teamData, setTeamData] = useState<{ heatmap: number[][]; radar: any[]; reflections: string[] } | null>(null);
   const [reflections, setReflections] = useState<string[]>([]);
-  const [teamId, setTeamId] = useState<string | null>(null);
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   useEffect(() => {
-    const fetchTeamIdAndData = async () => {
+    const fetchData = async () => {
       try {
-        const meRes = await fetch('/api/me');
-        const meJson = await meRes.json();
-        const resolvedTeamId = meJson?.teamId ?? 'null';
-        setTeamId(resolvedTeamId);
-
         const [soloRes, teamRes] = await Promise.all([
           fetch(`/api/empower/solo?month=${selectedMonth}`),
-          fetch(`/api/empower/team?month=${selectedMonth}&teamId=${resolvedTeamId}`),
+          fetch(`/api/empower/team?month=${selectedMonth}`),
         ]);
 
         const [soloJson, teamJson] = await Promise.all([
@@ -79,11 +78,11 @@ export default function TripleFourReportPage() {
       }
     };
 
-    fetchTeamIdAndData();
+    fetchData();
   }, [selectedMonth]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white px-6 py-20 font-cm">
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white px-6 py-20 font-cm print:bg-white print:text-black">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-left">
           Triple 4 Empowerment Report
@@ -128,6 +127,10 @@ export default function TripleFourReportPage() {
           ) : (
             <p className="text-gray-500 italic">No reflections available for this month.</p>
           )}
+        </div>
+
+        <div className="mt-10 print:hidden text-right">
+          <Button onClick={handlePrint}>Export as PDF</Button>
         </div>
       </div>
     </div>
