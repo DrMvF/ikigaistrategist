@@ -1,89 +1,85 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser, useClerk } from '@clerk/nextjs';
 import { track } from '@vercel/analytics';
 
 export default function OnboardingPage() {
-  const [cycleDay, setCycleDay] = useState<number | ''>('');
+  const [teamId, setTeamId] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
   const { user } = useUser();
   const { openSignIn } = useClerk();
 
-  const determinePhase = (day: number) => {
-    if (day >= 1 && day <= 5) return 'menstruation';
-    if (day >= 6 && day <= 13) return 'follicular';
-    if (day >= 14 && day <= 18) return 'ovulation';
-    if (day >= 19 && day <= 35) return 'luteal';
-    return 'unknown';
-  };
+  // Track initial page view
+  useEffect(() => {
+    track('page_view_onboarding');
+  }, []);
 
-  const handleStart = async () => {
+  const handleStart = () => {
     if (!user) {
-      openSignIn(); // Öffnet Clerk-SignIn Modal, wenn nicht eingeloggt
+      openSignIn();
       return;
     }
 
-    if (typeof cycleDay === 'number' && cycleDay >= 1 && cycleDay <= 35) {
-      const phase = determinePhase(cycleDay);
-
-      try {
-        const res = await fetch('/api/cycle', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ cycleDay, userId: user.id }),
-        });
-
-        if (!res.ok) {
-          const data = await res.json();
-          setError(data.error || 'Something went wrong.');
-          return;
-        }
-
-        track('cycle_phase_saved', { day: cycleDay });
-      } catch (err) {
-        console.error('❌ API error:', err);
-        setError('Failed to save cycle info.');
-        return;
+    try {
+      if (teamId.trim()) {
+        localStorage.setItem('team_id', teamId.trim());
+        track('onboarding_team_selected', { teamId: teamId.trim() });
+      } else {
+        track('onboarding_solo_selected');
       }
 
-      localStorage.setItem('cycle_day', cycleDay.toString());
-      localStorage.setItem('cycle_phase', phase);
       router.push('/journal');
-    } else {
-      setError('Please enter a valid day between 1 and 35.');
+    } catch (err) {
+      console.error('❌ Onboarding error:', err);
+      setError('Something went wrong. Please try again.');
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-24 font-cm text-black dark:text-white bg-white dark:bg-black">
+    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-20 font-cm text-black dark:text-white bg-white dark:bg-black">
       <main className="max-w-xl w-full text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-          Welcome, powerful woman.
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6">
+          Welcome. Let’s make your clarity operational.
         </h1>
-        <p className="text-xl sm:text-2xl mb-6">
-          Your purpose isn’t broken. <br /> Your rhythm is just ignored.
-        </p>
-        <p className="text-base sm:text-xl mb-4">
-          Let’s begin by honoring your body. <br />
-          Tell us where you are in your cycle – <br />
-          and we’ll align your prompts to your current phase.
+
+        <p className="text-lg sm:text-xl mb-4">
+          You’re here because performance alone isn’t enough anymore.
+          You want to lead with clarity. <br />
+          Think with structure. <br />
+          And act from emotional integrity — not exhaustion.
         </p>
 
-        <label className="block text-xl sm:text-xl mb-3 mt-10" htmlFor="cycleDay">
-          On which day of your menstrual cycle are you today?
-        </label>
+        <p className="text-base sm:text-lg mt-6 mb-4">
+          Whether you’re a team of one or a team of many: <br />
+          Ikigai Strategist starts with a simple question of context.
+        </p>
+
+        <div className="text-left mt-8 text-base sm:text-lg space-y-2">
+          <p><strong>👉 Are you using this system:</strong></p>
+          <p>– <em>as part of a team</em> → enter your Team ID below</p>
+          <p>– <em>on your own</em> → just leave the field blank</p>
+        </div>
+
+        <p className="mt-6 text-base sm:text-lg">
+          This helps us align your reflections — <br />
+          either into a shared team report <br />
+          or as part of your personal clarity journey.
+        </p>
+
+        <p className="mt-6 mb-4 text-sm sm:text-base italic text-gray-600 dark:text-gray-400">
+          One field. One choice. Maximum relevance.
+        </p>
 
         <input
-          type="number"
-          id="cycleDay"
-          min={1}
-          max={35}
-          value={cycleDay}
-          onChange={(e) => setCycleDay(Number(e.target.value))}
-          className="w-24 text-center px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-black text-black dark:text-white text-lg"
+          type="text"
+          id="teamId"
+          placeholder="Team ID (optional)"
+          value={teamId}
+          onChange={(e) => setTeamId(e.target.value)}
+          className="w-64 text-center px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-black text-black dark:text-white text-lg"
         />
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
