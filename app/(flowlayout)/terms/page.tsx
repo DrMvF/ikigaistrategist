@@ -11,7 +11,7 @@ export default function TermsPage() {
       <h2 className="text-2xl font-semibold mt-10 mb-4">1. Use of the Application</h2>
       <p>
         Ikigai Strategist is a self-guided digital system for journaling, cycle-based habit tracking, and inner reflection.
-        It is designed for personal development and does not replace medical, psychological, or financial advice.
+        It is designed for personal and team development and does not replace medical, psychological, or financial advice.
         Access is granted through authentication and optional payment tiers.
       </p>
 

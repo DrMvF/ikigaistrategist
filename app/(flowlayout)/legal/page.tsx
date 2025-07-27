@@ -16,7 +16,7 @@ export default function LegalPage() {
       <p className="mb-4">
         <strong>Contact</strong><br />
         Phone: +49 (0) 151 65122333<br />
-        Email: hello@radicalsensitiveleadership.com
+        Email: mail@ikigaistrategist.de
       </p>
 
       <p className="mb-4">

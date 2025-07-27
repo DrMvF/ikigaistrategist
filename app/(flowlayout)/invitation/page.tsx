@@ -6,7 +6,7 @@ import { track } from "@vercel/analytics";
 export default function InvitationPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-20 py-20 font-cm text-black dark:text-white bg-white dark:bg-black">
-      <main className="max-w-3xl w-full text-left space-y-8 text-lg sm:text-xl leading-relaxed">
+      <main className="max-w-3xl w-full text-center space-y-8 text-lg sm:text-xl leading-relaxed">
         <h1 className="text-3xl sm:text-4xl font-bold">
           Emotionally. Strategically. Collectively.
         </h1>
@@ -25,7 +25,7 @@ export default function InvitationPage() {
           With our <strong>Triple 4 System</strong>, you build real-time awareness of what matters most:
         </p>
 
-        <ul className="list-disc list-inside ml-4 space-y-2">
+        <ul className="list-none space-y-2">
           <li><strong>4 JERT Steps</strong>: Journal, Evaluate, Report, Trajectory</li>
           <li><strong>4 Core Dimensions</strong>: Goals, Energy, Communication, Trust</li>
           <li><strong>4-Week Pattern</strong>: One daily check-in for four weeks</li>
@@ -35,13 +35,12 @@ export default function InvitationPage() {
           Here’s how it works — your full journey:
         </p>
 
-        <ol className="list-decimal list-inside ml-4 space-y-4">
+        <ol className="list-decimal list-inside space-y-4 text-left mx-auto max-w-xl">
           <li>
             <strong>Start – Identify yourself</strong><br />
             Choose your mode:<br />
-            → <em>Team member</em> – enter your Team ID to contribute to a shared pattern<br />
-            → <em>Solo mode</em> – use Ikigai Strategist as your personal mental clarity tracker<br />
-            <br />
+            <em>Team member</em> – enter your Team ID to contribute to a shared pattern<br />
+            <em>Solo mode</em> – use Ikigai Strategist as your personal mental clarity tracker<br /><br />
             Either way, you begin from where you are: mentally, emotionally, professionally.
           </li>
           <li>
@@ -79,9 +78,9 @@ export default function InvitationPage() {
         </ol>
 
         <p className="italic text-gray-600 dark:text-gray-400">
-          The world keeps accelerating. But clarity is not found by moving faster — it’s found by tuning in. <br />
-          Whether you lead a team or lead yourself: <br />
-          You are not here to just perform. <br />
+          The world keeps accelerating. But clarity is not found by moving faster — it’s found by tuning in.<br />
+          Whether you lead a team or lead yourself:<br />
+          You are not here to just perform.<br />
           You are here to evolve — consciously, rhythmically, sustainably.
         </p>
 
