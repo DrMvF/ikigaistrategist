@@ -84,8 +84,9 @@ export default function TripleFourReportPage() {
           Triple 4 Empowerment Report
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          This monthly report summarizes your personal journey (solo) and team patterns
-          based on your Ikigai Team Resilience check-ins: Goals, Energy, Communication & Trust.
+          This monthly report summarizes your personal journey (solo) and provides a comparison with team-level patterns – either based on your assigned team or, if no team is defined, based on all unaffiliated individuals in the system.
+          It reflects data from your Ikigai Resilience check-ins across four core dimensions: Goals, Energy, Communication & Trust.
+          
         </p>
 
         <div className="mb-10">
@@ -118,7 +119,6 @@ export default function TripleFourReportPage() {
         </div>
 
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">Textual Highlights</h2>
           {reflections.length > 0 ? (
             <TextHighlights reflections={reflections} />
           ) : (

@@ -3,7 +3,7 @@
 import { db } from '@/lib/db';
 import { reflections } from '@/drizzle/schema';
 import { auth } from '@clerk/nextjs/server';
-import { eq } from 'drizzle-orm';
+import { eq, isNull } from 'drizzle-orm';
 import { format, getDay, getWeekOfMonth } from 'date-fns';
 
 export const runtime = 'nodejs';
@@ -12,9 +12,9 @@ export async function GET(req: Request) {
   const { userId } = await auth();
   const { searchParams } = new URL(req.url);
   const month = searchParams.get('month'); // z. B. "2025-07"
-  const teamId = searchParams.get('teamId'); // z. B. "team-abc123"
+  const teamId = searchParams.get('teamId'); // z. B. "team-abc123" oder "null" (für keine Zuordnung)
 
-  if (!userId || !month || !teamId) {
+  if (!userId || !month || teamId === null) {
     return new Response(JSON.stringify({ error: 'Missing user, team or month' }), { status: 400 });
   }
 
@@ -22,9 +22,12 @@ export async function GET(req: Request) {
     const entries = await db
       .select()
       .from(reflections)
-      .where(eq(reflections.teamId, teamId)); // Filterung nach Team
+      .where(
+        teamId === 'null'
+          ? isNull(reflections.teamId)
+          : eq(reflections.teamId, teamId)
+      );
 
-    // Initialisiere 4 Wochen × 7 Tage Heatmap mit 0
     const heatmap = Array.from({ length: 4 }, () => Array(7).fill(0));
     const counts = Array.from({ length: 4 }, () => Array(7).fill(0));
 
@@ -35,9 +38,9 @@ export async function GET(req: Request) {
       const entryMonth = format(date, 'yyyy-MM');
       if (entryMonth !== month) continue;
 
-      const week = getWeekOfMonth(date, { weekStartsOn: 1 }) - 1; // Woche 0–3
-      const day = getDay(date); // 0 (Sonntag) – 6 (Samstag)
-      const weekday = day === 0 ? 6 : day - 1; // Montag = 0
+      const week = getWeekOfMonth(date, { weekStartsOn: 1 }) - 1;
+      const day = getDay(date);
+      const weekday = day === 0 ? 6 : day - 1;
 
       const values = [
         entry.goalsScore ?? 0,
@@ -57,7 +60,6 @@ export async function GET(req: Request) {
       )
     );
 
-    // Radar-Auswertung pro Dimension
     const dimensions = ['goalsScore', 'energyScore', 'communicationScore', 'trustScore'] as const;
     const radar: { dimension: string; value: number }[] = [];
 
