@@ -47,13 +47,19 @@ export default function TripleFourReportPage() {
   const [soloData, setSoloData] = useState<{ heatmap: number[][]; radar: any[]; reflections: string[] } | null>(null);
   const [teamData, setTeamData] = useState<{ heatmap: number[][]; radar: any[]; reflections: string[] } | null>(null);
   const [reflections, setReflections] = useState<string[]>([]);
+  const [teamId, setTeamId] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchTeamIdAndData = async () => {
       try {
+        const meRes = await fetch('/api/me');
+        const meJson = await meRes.json();
+        const resolvedTeamId = meJson?.teamId ?? 'null';
+        setTeamId(resolvedTeamId);
+
         const [soloRes, teamRes] = await Promise.all([
           fetch(`/api/empower/solo?month=${selectedMonth}`),
-          fetch(`/api/empower/team?month=${selectedMonth}`),
+          fetch(`/api/empower/team?month=${selectedMonth}&teamId=${resolvedTeamId}`),
         ]);
 
         const [soloJson, teamJson] = await Promise.all([
@@ -66,7 +72,6 @@ export default function TripleFourReportPage() {
 
         const combinedReflections: string[] = [
           ...(soloJson.reflections || []),
-          // Keine teamReflections mehr, da Team anonym bleibt
         ];
         setReflections(combinedReflections);
       } catch (error) {
@@ -74,7 +79,7 @@ export default function TripleFourReportPage() {
       }
     };
 
-    fetchData();
+    fetchTeamIdAndData();
   }, [selectedMonth]);
 
   return (
@@ -86,7 +91,6 @@ export default function TripleFourReportPage() {
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
           This monthly report summarizes your personal journey (solo) and provides a comparison with team-level patterns – either based on your assigned team or, if no team is defined, based on all unaffiliated individuals in the system.
           It reflects data from your Ikigai Resilience check-ins across four core dimensions: Goals, Energy, Communication & Trust.
-          
         </p>
 
         <div className="mb-10">

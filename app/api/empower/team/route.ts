@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   const { userId } = await auth();
   const { searchParams } = new URL(req.url);
   const month = searchParams.get('month'); // z. B. "2025-07"
-  const teamId = searchParams.get('teamId'); // z. B. "team-abc123" oder "null" (für keine Zuordnung)
+  const teamId = searchParams.get('teamId'); // z. B. "team-abc123" oder "null" (als string)
 
   if (!userId || !month || teamId === null) {
     return new Response(JSON.stringify({ error: 'Missing user, team or month' }), { status: 400 });
@@ -25,9 +25,10 @@ export async function GET(req: Request) {
       .where(
         teamId === 'null'
           ? isNull(reflections.teamId)
-          : eq(reflections.teamId, teamId)
+          : eq(reflections.teamId, teamId as string)
       );
 
+    // Initialisiere 4 Wochen × 7 Tage Heatmap mit 0
     const heatmap = Array.from({ length: 4 }, () => Array(7).fill(0));
     const counts = Array.from({ length: 4 }, () => Array(7).fill(0));
 
@@ -60,6 +61,7 @@ export async function GET(req: Request) {
       )
     );
 
+    // Radar-Auswertung pro Dimension
     const dimensions = ['goalsScore', 'energyScore', 'communicationScore', 'trustScore'] as const;
     const radar: { dimension: string; value: number }[] = [];
 
