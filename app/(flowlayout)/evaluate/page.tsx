@@ -12,13 +12,13 @@ interface Reflection {
   inputText: string;
   reflectionText: string;
   createdAt: string;
-  loveScore: number | null;
-  skillScore: number | null;
-  worldScore: number | null;
-  financeScore: number | null;
+  goalsScore: number | null;
+  energyScore: number | null;
+  trustScore: number | null;
+  communicationScore: number | null;
 }
 
-type IkigaiDimension = 'loveScore' | 'skillScore' | 'worldScore' | 'financeScore';
+type IkigaiDimension = 'goalsScore' | 'energyScore' | 'trustScore' | 'communicationScore';
 
 const dimensionMeta: {
   field: IkigaiDimension;
@@ -27,32 +27,28 @@ const dimensionMeta: {
   scaleNote: string;
 }[] = [
   {
-    field: 'loveScore',
-    label: 'Love (1–10)',
-    question:
-      'To what extent did your reflection speak of love, tenderness, or connection—with yourself or others?',
-    scaleNote: '(1 = not at all, 10 = fully and clearly present)',
+    field: 'goalsScore',
+    label: 'Goals (1–10)',
+    question: 'How clear and aligned do your current goals feel?',
+    scaleNote: '(1 = unclear or absent, 10 = deeply meaningful and focused)',
   },
   {
-    field: 'skillScore',
-    label: 'Skill (1–10)',
-    question:
-      'To what degree did your reflection express your capacity or inner mastery?',
-    scaleNote: '(1 = not at all, 10 = fully and clearly embodied)',
+    field: 'energyScore',
+    label: 'Energy (1–10)',
+    question: 'How much energy, vitality, or momentum is present today?',
+    scaleNote: '(1 = drained or scattered, 10 = vibrant and alive)',
   },
   {
-    field: 'worldScore',
-    label: 'World (1–10)',
-    question:
-      'Did your words resonate with something larger—others, the world, a shared movement?',
-    scaleNote: '(1 = purely personal, 10 = deeply connected to the collective)',
+    field: 'trustScore',
+    label: 'Trust (1–10)',
+    question: 'To what degree do you feel safe, confident, and self-connected?',
+    scaleNote: '(1 = anxious or doubtful, 10 = grounded and calm)',
   },
   {
-    field: 'financeScore',
-    label: 'Finance (1–10)',
-    question:
-      'Were there any clues about money, safety, clarity, or your material field of influence today?',
-    scaleNote: '(1 = no financial theme at all, 10 = clearly addressed or felt)',
+    field: 'communicationScore',
+    label: 'Communication (1–10)',
+    question: 'How clearly are your thoughts or emotions being expressed?',
+    scaleNote: '(1 = bottled up or fuzzy, 10 = articulated and understood)',
   },
 ];
 
@@ -63,20 +59,19 @@ export default function EvaluatePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchReflections = async () => {
-    const res = await fetch('/api/reflections');
-    const data = await res.json();
+    const fetchReflections = async () => {
+      const res = await fetch('/api/reflections');
+      const data = await res.json();
 
-    // ⬇️ Sortierung nach Datum absteigend
-    const sorted = data.sort(
-      (a: Reflection, b: Reflection) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+      const sorted = data.sort(
+        (a: Reflection, b: Reflection) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
 
-    setReflections(sorted);
-    setLoading(false);
-  };
-  fetchReflections();
-}, []);
+      setReflections(sorted);
+      setLoading(false);
+    };
+    fetchReflections();
+  }, []);
 
   const handleRatingChange = async (
     id: string,
