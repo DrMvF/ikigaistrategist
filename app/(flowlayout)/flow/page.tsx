@@ -3,19 +3,19 @@
 import Link from "next/link";
 
 const stages = [
-  { name: "Home / Intro", path: "/", status: "pre", note: "Landing page (public)" },
-  { name: "Waitlist", path: "/waitlist", status: "pre", note: "Mailcoach opt-in" },
-  { name: "Start", path: "/start", status: "✅", note: "Welcome screen" },
-  { name: "Invitation", path: "/invitation", status: "✅", note: "Explains Triple 4 system" },
-  { name: "Onboarding", path: "/onboarding", status: "✅", note: "Cycle input + DB save" },
+  { name: "Home / Intro", path: "/", note: "Landing page (public)" },
+  { name: "Waitlist", path: "/waitlist", note: "Mailcoach opt-in" },
+  { name: "Start", path: "/start", note: "Welcome screen" },
+  { name: "Invitation", path: "/invitation", note: "Explains Triple 4 system" },
+  { name: "Onboarding", path: "/onboarding", note: "Cycle input + DB save" },
 ];
 
 const navigatorStages = [
-  { name: "Journal", path: "/journal", status: "✅", note: "Whisper input + reflection + DB" },
-  { name: "Evaluate", path: "/evaluate", status: "✅", note: "Ikigai ratings + DB" },
-  { name: "Report", path: "/report", status: "✅", note: "Radar chart (cycle phase: to be added)" },
-  { name: "Trajectory", path: "/trajectory", status: "✅", note: "Ikigai trends over time (cycle phase: to be added)" },
-  { name: "TripleFour", path: "/triplefour", status: "⏳", note: "Empowerment report – not built yet" },
+  { name: "Journal", path: "/journal", note: "Whisper input + reflection + DB" },
+  { name: "Evaluate", path: "/evaluate", note: "Ratings: Goals, Energy, Trust, Communication" },
+  { name: "Report", path: "/report", note: "Radar chart (week comparison, team-aware)" },
+  { name: "Trajectory", path: "/trajectory", note: "Line chart across Ikigai dimensions over time" },
+  { name: "Triple Four", path: "/triplefour", note: "Four-week Empowerment Report (Solo or Team)" },
 ];
 
 export default function FlowPage() {
@@ -25,11 +25,10 @@ export default function FlowPage() {
         <h1 className="text-3xl sm:text-4xl font-bold mb-4">Ikigai Strategist – System Flow</h1>
 
         <section>
-          <h2 className="text-2xl font-semibold mb-4">⤷ Pre-Flow</h2>
+          <h2 className="text-2xl font-semibold mb-4">Pre-Flow</h2>
           <ul className="space-y-2">
             {stages.map((stage) => (
               <li key={stage.name} className="flex items-start gap-4">
-                <span className="w-6">{stage.status}</span>
                 <Link href={stage.path} className="underline font-medium hover:text-gray-600 dark:hover:text-gray-300">
                   {stage.name}
                 </Link>
@@ -40,11 +39,10 @@ export default function FlowPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold mb-4">⤷ Core Navigator</h2>
+          <h2 className="text-2xl font-semibold mb-4">Core Navigator</h2>
           <ul className="space-y-2">
             {navigatorStages.map((stage) => (
               <li key={stage.name} className="flex items-start gap-4">
-                <span className="w-6">{stage.status}</span>
                 <Link href={stage.path} className="underline font-medium hover:text-gray-600 dark:hover:text-gray-300">
                   {stage.name}
                 </Link>
