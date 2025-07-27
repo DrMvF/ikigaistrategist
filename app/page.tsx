@@ -14,7 +14,7 @@ export default function Home() {
           A clarity system for high-performing professionals and resilient teams.
         </p>
 
-        <div className="text-left text-lg sm:text-xl leading-relaxed space-y-6 mt-12">
+        <div className="text-center text-lg sm:text-xl leading-relaxed space-y-6 mt-12">
           <p>
             Built for those who want to lead with depth,<br />
             think with intention,<br />
