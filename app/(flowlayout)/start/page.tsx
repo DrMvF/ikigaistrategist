@@ -15,7 +15,7 @@ export default function StartPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-40 sm:pt-56 font-cm text-black dark:text-white bg-white dark:bg-black">
+    <div className="flex flex-col min-h-screen items-center justify-start px-8 sm:px-20 pt-20 sm:pt-32 font-cm text-black dark:text-white bg-white dark:bg-black">
       <main className="flex flex-col items-center text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">
           Ikigai Strategist
@@ -25,7 +25,7 @@ export default function StartPage() {
           A clarity system for high-performing professionals <br /> and resilient teams.
         </p>
 
-        <div className="h-12 sm:h-16" />
+        <div className="h-10 sm:h-14" />
 
         <p className="text-lg sm:text-xl">
           Built for those who want to lead with depth, <br />
