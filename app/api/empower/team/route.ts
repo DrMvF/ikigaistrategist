@@ -11,33 +11,38 @@ export const runtime = 'nodejs';
 export async function GET(req: Request) {
   const { userId } = await auth();
   const { searchParams } = new URL(req.url);
-  const month = searchParams.get('month'); // z. B. "2025-07"
-  const teamId = searchParams.get('teamId'); // z. B. "team-abc123" oder "null" (als string)
+  const month = searchParams.get('month');
 
-  if (!userId || !month || teamId === null) {
-    return new Response(JSON.stringify({ error: 'Missing user, team or month' }), { status: 400 });
+  if (!userId || !month) {
+    return new Response(JSON.stringify({ error: 'Missing user or month' }), { status: 400 });
   }
 
   try {
+    // 🧠 Hole teamId des aktuellen Users
+    const teamIdResult = await db
+      .select({ teamId: reflections.teamId })
+      .from(reflections)
+      .where(eq(reflections.userId, userId))
+      .limit(1);
+
+    const userTeamId = teamIdResult[0]?.teamId ?? null;
+
+    // 🔍 Wähle Reflections nach TeamId oder ohne Team
     const entries = await db
       .select()
       .from(reflections)
       .where(
-        teamId === 'null'
-          ? isNull(reflections.teamId)
-          : eq(reflections.teamId, teamId as string)
+        userTeamId ? eq(reflections.teamId, userTeamId) : isNull(reflections.teamId)
       );
 
-    // Initialisiere 4 Wochen × 7 Tage Heatmap mit 0
+    // Heatmap vorbereiten
     const heatmap = Array.from({ length: 4 }, () => Array(7).fill(0));
     const counts = Array.from({ length: 4 }, () => Array(7).fill(0));
 
     for (const entry of entries) {
       if (!entry.createdAt) continue;
-
       const date = new Date(entry.createdAt);
-      const entryMonth = format(date, 'yyyy-MM');
-      if (entryMonth !== month) continue;
+      if (format(date, 'yyyy-MM') !== month) continue;
 
       const week = getWeekOfMonth(date, { weekStartsOn: 1 }) - 1;
       const day = getDay(date);
@@ -61,7 +66,7 @@ export async function GET(req: Request) {
       )
     );
 
-    // Radar-Auswertung pro Dimension
+    // Radar-Auswertung
     const dimensions = ['goalsScore', 'energyScore', 'communicationScore', 'trustScore'] as const;
     const radar: { dimension: string; value: number }[] = [];
 
