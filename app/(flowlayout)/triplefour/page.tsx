@@ -24,9 +24,9 @@ export default function TripleFourReportPage() {
     const fetchData = async () => {
       try {
         const [soloRes, teamRes, highlightRes] = await Promise.all([
-          fetch(`/api/report/solo?month=${selectedMonth}`),
-          fetch(`/api/report/team?month=${selectedMonth}`),
-          fetch(`/api/report/highlights?month=${selectedMonth}`),
+          fetch(`/api/empower/solo?month=${selectedMonth}`),
+          fetch(`/api/empower/team?month=${selectedMonth}`),
+          fetch(`/api/empower/highlights?month=${selectedMonth}`),
         ]);
 
         const [soloJson, teamJson, highlightJson] = await Promise.all([
@@ -92,7 +92,11 @@ export default function TripleFourReportPage() {
 
         <div className="mt-12">
           <h2 className="text-2xl font-semibold mb-4">Textual Highlights</h2>
-          {highlights.length > 0 && <TextHighlights reflections={highlights} />}
+          {highlights.length > 0 ? (
+            <TextHighlights reflections={highlights} />
+          ) : (
+            <p className="text-gray-500 italic">No highlights available for this month.</p>
+          )}
         </div>
       </div>
     </div>
