@@ -1,4 +1,7 @@
-// 2. components/analytics/RadarChart.tsx
+// components/analytics/RadarChart.tsx
+'use client';
+
+import React from 'react';
 import {
   Radar,
   RadarChart as RechartsRadarChart,
@@ -8,7 +11,18 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-export default function RadarChart({ data, title }: { data: any[]; title: string }) {
+interface RadarDataPoint {
+  dimension: string;
+  value: number;
+}
+
+export default function RadarChart({
+  data,
+  title,
+}: {
+  data: RadarDataPoint[];
+  title: string;
+}) {
   return (
     <div className="space-y-2">
       <h3 className="text-xl font-semibold text-center">{title}</h3>
@@ -18,7 +32,13 @@ export default function RadarChart({ data, title }: { data: any[]; title: string
             <PolarGrid />
             <PolarAngleAxis dataKey="dimension" />
             <PolarRadiusAxis angle={30} domain={[0, 10]} />
-            <Radar name="Avg" dataKey="value" stroke="#000" fill="#000" fillOpacity={0.4} />
+            <Radar
+              name="Avg"
+              dataKey="value"
+              stroke="#000"
+              fill="#000"
+              fillOpacity={0.4}
+            />
           </RechartsRadarChart>
         </ResponsiveContainer>
       </div>

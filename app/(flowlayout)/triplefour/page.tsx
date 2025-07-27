@@ -1,47 +1,45 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { format, parse, getMonth } from "date-fns";
-import Heatmap from "@/components/Heatmap";
-import RadarChart from "@/components/RadarChart";
-import TextHighlights from "@/components/TextHighlights";
+import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
+import Heatmap from '@/components/analytics/Heatmap';
+import RadarChart from '@/components/analytics/RadarChart';
+import TextHighlights from '@/components/analytics/TextHighlights';
 
 const monthOptions = Array.from({ length: 12 }, (_, i) => {
   const date = new Date(2025, i, 1);
   return {
-    label: format(date, "MMMM yyyy"),
-    value: format(date, "yyyy-MM"),
+    label: format(date, 'MMMM yyyy'),
+    value: format(date, 'yyyy-MM'),
   };
 });
 
 export default function TripleFourReportPage() {
-  const [selectedMonth, setSelectedMonth] = useState(
-    format(new Date(), "yyyy-MM")
-  );
-
-  // You'd fetch aggregated solo + team data based on selectedMonth
-  const [soloData, setSoloData] = useState(null);
-  const [teamData, setTeamData] = useState(null);
-  const [highlights, setHighlights] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(format(new Date(), 'yyyy-MM'));
+  const [soloData, setSoloData] = useState<{ heatmap: number[][]; radar: any[] } | null>(null);
+  const [teamData, setTeamData] = useState<{ heatmap: number[][]; radar: any[] } | null>(null);
+  const [highlights, setHighlights] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const soloRes = await fetch(`/api/report/solo?month=${selectedMonth}`);
-        const teamRes = await fetch(`/api/report/team?month=${selectedMonth}`);
-        const highlightRes = await fetch(
-          `/api/report/highlights?month=${selectedMonth}`
-        );
+        const [soloRes, teamRes, highlightRes] = await Promise.all([
+          fetch(`/api/report/solo?month=${selectedMonth}`),
+          fetch(`/api/report/team?month=${selectedMonth}`),
+          fetch(`/api/report/highlights?month=${selectedMonth}`),
+        ]);
 
-        const soloJson = await soloRes.json();
-        const teamJson = await teamRes.json();
-        const highlightJson = await highlightRes.json();
+        const [soloJson, teamJson, highlightJson] = await Promise.all([
+          soloRes.json(),
+          teamRes.json(),
+          highlightRes.json(),
+        ]);
 
         setSoloData(soloJson);
         setTeamData(teamJson);
         setHighlights(highlightJson);
       } catch (error) {
-        console.error("Error loading report data", error);
+        console.error('Error loading report data', error);
       }
     };
 
@@ -75,26 +73,26 @@ export default function TripleFourReportPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
-            <h2 className="text-xl font-semibold mb-2">🔥 Solo Heatmap</h2>
-            <Heatmap data={soloData?.heatmap} />
+            <h2 className="text-xl font-semibold mb-2">Solo Heatmap</h2>
+            {soloData?.heatmap && <Heatmap data={soloData.heatmap} title="Solo Heatmap" />}
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2">🔥 Team Heatmap</h2>
-            <Heatmap data={teamData?.heatmap} />
+            <h2 className="text-xl font-semibold mb-2">Team Heatmap</h2>
+            {teamData?.heatmap && <Heatmap data={teamData.heatmap} title="Team Heatmap" />}
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2">🌀 Solo Radar</h2>
-            <RadarChart data={soloData?.radar} />
+            <h2 className="text-xl font-semibold mb-2">Solo Radar</h2>
+            {soloData?.radar && <RadarChart data={soloData.radar} title="Solo Radar" />}
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2">🌀 Team Radar</h2>
-            <RadarChart data={teamData?.radar} />
+            <h2 className="text-xl font-semibold mb-2">Team Radar</h2>
+            {teamData?.radar && <RadarChart data={teamData.radar} title="Team Radar" />}
           </div>
         </div>
 
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">📝 Textual Highlights</h2>
-          <TextHighlights data={highlights} />
+          <h2 className="text-2xl font-semibold mb-4">Textual Highlights</h2>
+          {highlights.length > 0 && <TextHighlights reflections={highlights} />}
         </div>
       </div>
     </div>

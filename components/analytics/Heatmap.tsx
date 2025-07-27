@@ -1,5 +1,15 @@
-// 1. components/analytics/Heatmap.tsx
-export default function Heatmap({ data, title }: { data: number[][]; title: string }) {
+// components/analytics/Heatmap.tsx
+'use client';
+
+import React from 'react';
+
+export default function Heatmap({
+  data,
+  title,
+}: {
+  data: number[][];
+  title: string;
+}) {
   return (
     <div className="space-y-2">
       <h3 className="text-xl font-semibold text-center">{title}</h3>
