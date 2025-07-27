@@ -48,6 +48,8 @@ export default function JournalClient() {
     e.preventDefault();
     track('click_journal_submit');
 
+    const teamId = localStorage.getItem('team_id') || null;
+
     try {
       const response = await fetch('/api/save-reflection', {
         method: 'POST',
@@ -55,6 +57,7 @@ export default function JournalClient() {
         body: JSON.stringify({
           entry,
           reflection,
+          teamId,
         }),
       });
 

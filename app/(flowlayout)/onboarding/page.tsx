@@ -57,8 +57,8 @@ export default function OnboardingPage() {
           Ikigai Strategist starts with a simple question of context.
         </p>
 
-        <div className="text-left mt-8 text-base sm:text-lg space-y-2">
-          <p><strong>👉 Are you using this system:</strong></p>
+        <div className="text-center mt-8 text-base sm:text-lg space-y-2">
+          <p><strong>Are you using this system:</strong></p>
           <p>– <em>as part of a team</em> → enter your Team ID below</p>
           <p>– <em>on your own</em> → just leave the field blank</p>
         </div>

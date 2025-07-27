@@ -5,8 +5,8 @@ import { track } from "@vercel/analytics";
 
 export default function InvitationPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-20 py-20 font-cm text-black dark:text-white bg-white dark:bg-black">
-      <main className="max-w-3xl w-full text-center space-y-8 text-lg sm:text-xl leading-relaxed">
+    <div className="flex flex-col items-start justify-center min-h-screen px-6 sm:px-20 py-20 font-cm text-black dark:text-white bg-white dark:bg-black">
+      <main className="max-w-3xl w-full space-y-8 text-lg sm:text-xl leading-relaxed text-left">
         <h1 className="text-3xl sm:text-4xl font-bold">
           Emotionally. Strategically. Collectively.
         </h1>
@@ -35,7 +35,7 @@ export default function InvitationPage() {
           Here’s how it works — your full journey:
         </p>
 
-        <ol className="list-decimal list-inside space-y-4 text-left mx-auto max-w-xl">
+        <ol className="list-decimal list-inside space-y-4">
           <li>
             <strong>Start – Identify yourself</strong><br />
             Choose your mode:<br />
@@ -70,7 +70,7 @@ export default function InvitationPage() {
           </li>
           <li>
             <strong>Triple 4 Empowerment Report – Your psychological pulse</strong><br />
-            Every few days, you’ll receive a synthesized reflection: 
+            You’ll receive a synthesized reflection: 
             your current standing across the 4×4 system — 
             as a mirror, not a score. 
             A quiet invitation to recalibrate with compassion.
@@ -78,9 +78,9 @@ export default function InvitationPage() {
         </ol>
 
         <p className="italic text-gray-600 dark:text-gray-400">
-          The world keeps accelerating. But clarity is not found by moving faster — it’s found by tuning in.<br />
-          Whether you lead a team or lead yourself:<br />
-          You are not here to just perform.<br />
+          The world keeps accelerating. But clarity is not found by moving faster — it’s found by tuning in.
+          Whether you lead a team or lead yourself:
+          You are not here to just perform.
           You are here to evolve — consciously, rhythmically, sustainably.
         </p>
 
