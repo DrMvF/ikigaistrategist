@@ -1,4 +1,3 @@
-// components/analytics/RadarChart.tsx
 'use client';
 
 import React from 'react';
@@ -28,16 +27,33 @@ export default function RadarChart({
       <h3 className="text-xl font-semibold text-center">{title}</h3>
       <div className="w-full h-72">
         <ResponsiveContainer>
-          <RechartsRadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="dimension" />
-            <PolarRadiusAxis angle={30} domain={[0, 10]} />
+          <RechartsRadarChart
+            cx="50%"
+            cy="50%"
+            outerRadius="65%"
+            data={data}
+          >
+            <PolarGrid stroke="#ccc" strokeDasharray="3 3" />
+            <PolarAngleAxis
+              dataKey="dimension"
+              tick={{
+                fontSize: 14,
+                fontWeight: 500,
+              }}
+              tickLine={false}
+            />
+            <PolarRadiusAxis
+              domain={[0, 10]}
+              tick={false} // 👈 entfernt Zahlen
+              axisLine={false} // optional: entfernt Kreislinie
+              tickCount={0}
+            />
             <Radar
-              name="Avg"
+              name="Average"
               dataKey="value"
               stroke="#000"
               fill="#000"
-              fillOpacity={0.4}
+              fillOpacity={0.3}
             />
           </RechartsRadarChart>
         </ResponsiveContainer>
